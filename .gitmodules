@@ -1,0 +1,12 @@
+[submodule "Libraries/External/Base64"]
+	path = Libraries/External/Base64
+	url = https://github.com/rhymu8354/Base64
+[submodule "Libraries/External/Utf8"]
+	path = Libraries/External/Utf8
+	url = https://github.com/rhymu8354/Utf8
+[submodule "Libraries/External/googletest"]
+	path = Libraries/External/googletest
+	url = https://github.com/google/googletest
+[submodule "Libraries/Internal/Tools"]
+	path = Libraries/Internal/Tools
+	url = https://github.com/tanja84dk/Cpp-Tanaj84dk-Tools
