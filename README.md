@@ -18,3 +18,4 @@ See the 'LICENSE' for details. In summary ArgTools is licensed under the MIT Lic
  - [**Utf8**](https://github.com/rhymu8354/Utf8) created by [***Richard Walters***](https://github.com/rhymu8354) is licended under [***MIT License***](https://github.com/rhymu8354/Utf8/blob/main/LICENSE.txt)
  - [***googletest***](https://github.com/google/googletest) created by [***Google***](https://github.com/google) is licended under [***BSD 3-Clause "New" or "Revised" License***](https://github.com/google/googletest/blob/master/LICENSE)
  - [***Cpp-Tanja84dk-Tools***](https://github.com/tanja84dk/Cpp-Tanaj84dk-Tools) created by [***tanja84dk***](https://github.com/tanja84dk) is licended under [***MIT License***](https://github.com/tanja84dk/Cpp-Tanaj84dk-Tools/blob/master/LICENSE)
+ 
