@@ -179,17 +179,31 @@ void my8BitBinaryEncoding(void)
         inputDataBuffer.assign((std::istreambuf_iterator<char>(inputFileHandler)),
                                 std::istreambuf_iterator<char>());
         
-        std::stringstream binaryStringStream(inputDataBuffer);
+        std::vector<std::bitset<8>> binaryOutputVector;
+        binaryOutputVector.reserve(100);
 
-        while (binaryStringStream.good())
+        for ( std::size_t i = 0; i < inputDataBuffer.size(); i++ )
         {
-            std::bitset<8> bits;
-            binaryStringStream >> bits;
-            char characterDecoded = char(bits.to_ulong());
-            outputData += characterDecoded;
+            binaryOutputVector.push_back(std::bitset<8>(inputDataBuffer.c_str()[i]));
+
         }
 
-        std::cout << std::endl << std::endl << outputData << std::endl;
+        std::ofstream outputFileHandler;
+        outputFileHandler.open(outputFilename);
+        for ( size_t i = 0; i < binaryOutputVector.size(); i++ )
+        {
+            outputFileHandler << binaryOutputVector[i];
+            if ( i < ( binaryOutputVector.size() - 1 ))
+            {
+                outputFileHandler << ' ';
+            }
+        }
+        outputFileHandler.close();
+
+        std::cout << "The output is written to a file called " <<
+              outputFilename << " in the folder you have the program in" << std::endl;
+
+        //std::cout << std::endl << std::endl << outputData << std::endl;
     }
 
 }
