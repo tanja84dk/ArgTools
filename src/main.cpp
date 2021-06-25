@@ -4,18 +4,6 @@
 
 char timeBuffer[80];
 
-std::string inputFile;
-std::string myBase64Decoded;
-#ifdef comment
-std::string myBase64Decoding(const std::string &data)
-{
-    std::string outputData;
-    myBase64Decoded = Base64::Decode(data);
-
-    return myBase64Decoded;
-}
-#endif
-
 void myBase64Decoding(void)
 {
     std::string inFile;
@@ -202,8 +190,6 @@ void my8BitBinaryEncoding(void)
 
         std::cout << "The output is written to a file called " <<
               outputFilename << " in the folder you have the program in" << std::endl;
-
-        //std::cout << std::endl << std::endl << outputData << std::endl;
     }
 
 }
@@ -286,7 +272,7 @@ void my8BitBinaryDecoding(const std::string &inputFilename)
 
 }
 
-void printFile(const std::string &inputfile)
+void printFile(const std::string &inputFile)
 {
     bool printFileStatusCode;
     printFileStatusCode = Tools::doesFileExist(inputFile);
@@ -435,6 +421,7 @@ void SubMenu8bit(void)
 
 void MainMenu(void)
 {
+    std::string inputFile;
     while (1)
     {
         short unsigned int menuChoice;
