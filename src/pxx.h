@@ -8,5 +8,3 @@
 #include <streambuf>
 #include <algorithm>
 #include <sstream>
-#include <Base64/Base64.hpp>
-#include <Tools/Tools.h>
