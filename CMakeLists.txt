@@ -13,7 +13,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 configure_file(${PROJECT_NAME}Config.h.in ${PROJECT_NAME}Config.h)
 
 # Add source to this project's executable.
-add_executable(${PROJECT_NAME} "src/main.cpp" "src/main.h")
+add_executable(${PROJECT_NAME} "src/main.cpp" "src/main.h" "src/pxx.h")
 
 target_link_libraries(${PROJECT_NAME} "Base64" "Tools" "Utf8")
 
