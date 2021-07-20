@@ -4,59 +4,48 @@
 
 void myBase64Decoding(void)
 {
-    std::string inFile;
-    std::string inData;
-    std::string dataTemp;
-    std::string outFile;
-    std::string outData;
-    bool inFileCheck;
-    bool outFileCheck;
+    std::string inputFilename;
+    std::string inputData;
+    std::string outputFilename;
+    std::string outputData;
+    
+    printf("Enter the filename: ");
+    std::getline(std::cin >> std::ws, inputFilename);
+    std::cout << std::endl;
 
-    std::cout << "Enter the filename: ";
-    std::getline(std::cin >> std::ws, inFile);
-    inFileCheck = Tools::doesFileExist(inFile);
-    if ( inFileCheck == true )
+    if ( Tools::doesFileExist(inputFilename) == true )
     {
-    std::ifstream inFileHandler(inFile, std::ifstream::in);
+    std::ifstream inFileHandler(inputFilename, std::ifstream::in);
     inFileHandler.seekg(0, std::ios::end);
-    inData.reserve(inFileHandler.tellg());
+    inputData.reserve(inFileHandler.tellg());
     inFileHandler.seekg(0, std::ios::beg);
-    inData.assign((std::istreambuf_iterator<char>(inFileHandler)),
+    inputData.assign((std::istreambuf_iterator<char>(inFileHandler)),
                                    std::istreambuf_iterator<char>());
     };
-    outData = Base64::Decode((inData));
-    std::cout << std::endl << std::endl << outData << std::endl;
-    outFile = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inFile + "-Decoded-Base64.txt";
-    outFileCheck = Tools::doesFileExist(outFile);
-    if ( outFileCheck == false )
+
+    outputData = Base64::Decode((inputData));
+    
+    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Decoded-Base64.txt";
+    if ( Tools::doesFileExist(outputFilename) == false )
     {
-        std::ofstream outFileHandler;
-        outFileHandler.open(outFile);
-        outFileHandler << outData;
-        outFileHandler.close();
+        Tools::writeFile(outputData, outputFilename);
     }
 }
 
 void myBase64Decoding(const std::string &inputData)
 {
-    bool myBase64DecodingStatuscode;
-    std::string myBase64DecodedOutput;
-    std::string myBase64DecodedOutputFilename;
-    myBase64DecodedOutput = Base64::Decode(inputData);
+    bool statusCode;
+    std::string outputData;
+    std::string outputFilename;
+    outputData = Base64::Decode(inputData);
 
-    myBase64DecodedOutputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Decoded-Base64.txt";
-    myBase64DecodingStatuscode = Tools::doesFileExist(myBase64DecodedOutputFilename);
-    if ( myBase64DecodingStatuscode == false )
+    printf( "\n%s\n", outputData.c_str() );
+
+    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Decoded-Base64.txt";
+    if ( Tools::doesFileExist(outputFilename) == false )
     {
-        std::ofstream myBase64DecodedOutputFile;
-        myBase64DecodedOutputFile.open(myBase64DecodedOutputFilename);
-        myBase64DecodedOutputFile << myBase64DecodedOutput;
-        myBase64DecodedOutputFile.close();
-        std::cout << std::endl;
-        std::cout << "----------------------------" << std::endl;
-        std::cout << "The output is written to a file called "
-                  << myBase64DecodedOutputFilename << " in the folder you have the program in"
-                  << std::endl;
+        Tools::writeFile(outputData, outputFilename);
+        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
     }
 }
 
@@ -71,9 +60,11 @@ void myBase64DecodingString(void)
 
     outputData = Base64::Decode(inputData);
 
+    printf( "\n%s\n", outputData.c_str() );
+
     outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-From_String-Decoded-Base64.txt";
     outStatusCode = Tools::doesFileExist(outputFilename);
-        if (outStatusCode == 404) {
+        if (outStatusCode == false) {
             Tools::writeFile(outputData, outputFilename);
             printf( "The output is also written to a file called %s in the folder you have the program in", outputFilename.c_str() );
     };
@@ -81,56 +72,46 @@ void myBase64DecodingString(void)
 
 void myBase64Encoding(void)
 {
-    bool __myBase64EncodingStatus;
-    std::string __myBase64Encoding;
-    std::cout << "Enter Filename: "; std::getline(std::cin >> std::ws, __myBase64Encoding);
-    std::string __myBase64EncodingTemp;
-    std::string __myBase64EncodedOutput;
-    std::string __myBase64EncodedOutputFilename;
-    std::ifstream __myBase64EncodingFile(__myBase64Encoding, std::ifstream::in);
-    __myBase64EncodingFile.seekg(0, std::ios::end);
-    __myBase64EncodingTemp.reserve(__myBase64EncodingFile.tellg());
-    __myBase64EncodingFile.seekg(0, std::ios::beg);
-    __myBase64EncodingTemp.assign((std::istreambuf_iterator<char>(__myBase64EncodingFile)),
+    bool statusCode;
+    std::string inputFilename;
+    printf("Enter Filename: ");
+    std::getline(std::cin >> std::ws, inputFilename);
+    std::string inputData;
+    std::string outputData;
+    std::string outputFilename;
+    std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
+    inputFileHandler.seekg(0, std::ios::end);
+    inputData.reserve(inputFileHandler.tellg());
+    inputFileHandler.seekg(0, std::ios::beg);
+    inputData.assign((std::istreambuf_iterator<char>(inputFileHandler)),
                                    std::istreambuf_iterator<char>());
 
-    __myBase64EncodedOutput = Base64::Encode((__myBase64EncodingTemp));
+    outputData = Base64::Encode(inputData);
 
-    std::cout << std::endl << std::endl;
+    printf( "\n%s\n", outputData.c_str() );
 
-    std::cout << __myBase64EncodedOutput << std::endl << std::endl;
-
-    __myBase64EncodedOutputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + __myBase64Encoding + "-Encoded-Base64.txt";
-    __myBase64EncodingStatus = Tools::doesFileExist(__myBase64EncodedOutputFilename);
-    if (__myBase64EncodingStatus == false) {
-        std::ofstream __myBase64EncodedOutputFile;
-        __myBase64EncodedOutputFile.open(__myBase64EncodedOutputFilename);
-        __myBase64EncodedOutputFile << __myBase64EncodedOutput;
-        __myBase64EncodedOutputFile.close();
-        std::cout << "The output is also written to a file called " << __myBase64EncodedOutputFilename << " in the folder you have the program in" << std::endl;
+    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Encoded-Base64.txt";
+    if (Tools::doesFileExist(outputFilename) == false) {
+        Tools::writeFile(outputData, outputFilename);
+        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
     }
 };
 
 void myBase64Encoding(const std::string &data)
 {
-    bool __myBase64EncodingStatusCode;
-    std::string __myBase64EncodedOutput;
-    std::string __myBase64EncodedOutputFilename;
+    bool statusCode;
+    std::string outputData;
+    std::string outputFilename;
 
-    __myBase64EncodedOutput = Base64::Encode((data));
+    outputData = Base64::Encode((data));
 
-    std::cout << __myBase64EncodedOutput << std::endl;
+    printf( "\n%s\n", outputData.c_str() );
 
-    __myBase64EncodedOutputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "Manual-Input-Encoded-Base64.txt";
-    __myBase64EncodingStatusCode = Tools::doesFileExist(__myBase64EncodedOutputFilename);
-    if (__myBase64EncodingStatusCode == false) {
-        std::ofstream __myBase64EncodedOutputFile;
-        __myBase64EncodedOutputFile.open(__myBase64EncodedOutputFilename);
-        __myBase64EncodedOutputFile << __myBase64EncodedOutput;
-        __myBase64EncodedOutputFile.close();
-        std::cout << "The output is also written to a file called "
-                  << __myBase64EncodedOutputFilename << " in the folder you have the program in"
-                  << std::endl;
+    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-Base64.txt";
+    statusCode = Tools::doesFileExist(outputFilename);
+    if (statusCode == false) {
+        Tools::writeFile(outputData, outputFilename);
+        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
     }
 }
 
@@ -145,7 +126,9 @@ void my8BitBinaryEncoding(void)
     std::string inputDataBuffer;
     std::string outputData;
 
-    std::cout << "Enter Filename: "; std::getline(std::cin >> std::ws, inputFilename);
+    printf("Enter Filename: ");
+    std::getline(std::cin >> std::ws, inputFilename);
+    std::cout << std::endl;
 
     inputFileStatusCode = Tools::doesFileExist(inputFilename);
 
@@ -170,20 +153,8 @@ void my8BitBinaryEncoding(void)
 
         }
 
-        std::ofstream outputFileHandler;
-        outputFileHandler.open(outputFilename);
-        for ( size_t i = 0; i < binaryOutputVector.size(); i++ )
-        {
-            outputFileHandler << binaryOutputVector[i];
-            if ( i < ( binaryOutputVector.size() - 1 ))
-            {
-                outputFileHandler << ' ';
-            }
-        }
-        outputFileHandler.close();
-
-        std::cout << "The output is written to a file called " <<
-              outputFilename << " in the folder you have the program in" << std::endl;
+        Tools::writeFile(binaryOutputVector, outputFilename);
+        printf( "The output is also written to a file called %s in the folder you have the program in", outputFilename.c_str() );
     }
 
 }
@@ -203,17 +174,8 @@ void my8BitBinaryEncoding(const std::string &data)
     outputFileStatusCode = Tools::doesFileExist(outputFilename);
     if ( outputFileStatusCode == false )
     {
-        std::ofstream outputFileHandler;
-        outputFileHandler.open(outputFilename);
-        for ( int i = 0; i < binaryOutputVector.size(); i++ )
-        {
-            outputFileHandler << binaryOutputVector[i] << ' ';
-        }
-        outputFileHandler.close();
-
-        std::cout << "The output is also written to a file called "
-                  << outputFilename << " in the folder you have the program in"
-                  << std::endl;
+        Tools::writeFile(binaryOutputVector, outputFilename);
+        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
     }
     
 }
@@ -221,19 +183,12 @@ void my8BitBinaryEncoding(const std::string &data)
 void my8BitBinaryDecoding(const std::string &inputFilename)
 {
 
-    bool inputFileStatusCode;
-    bool outputFileStatusCode;
-
     std::string outputFilename;
     std::string inputDataBuffer;
     std::string outputData;
-
-    inputFileStatusCode = Tools::doesFileExist(inputFilename);
-
     outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + inputFilename + "-Binary-Decoded.txt";
-    outputFileStatusCode = Tools::doesFileExist(outputFilename);
 
-    if ( inputFileStatusCode == true  && outputFileStatusCode == false )
+    if ( Tools::doesFileExist(inputFilename) == true )
     {
         std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
         inputFileHandler.seekg(0, std::ios::end);
@@ -252,16 +207,14 @@ void my8BitBinaryDecoding(const std::string &inputFilename)
             outputData += characterDecoded;
         }
 
-        std::ofstream outputFileHandler;
-        outputFileHandler.open(outputFilename);
-        outputFileHandler << outputData;
-        outputFileHandler.close();
+        printf( "\n%s\n", outputData.c_str() );
+    }
+    
 
-        std::cout << std::endl << outputData << std::endl << std::endl;
-
-        std::cout << "The output is also written to a file called "
-                  << outputFilename << " in the folder you have the program in"
-                  << std::endl;
+    if ( Tools::doesFileExist(outputFilename) == false )
+    {
+        Tools::writeFile(outputData, outputFilename);
+        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
     }
 
 }
