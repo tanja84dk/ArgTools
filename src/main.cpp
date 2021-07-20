@@ -8,12 +8,12 @@ void myBase64Decoding(void)
     std::string inputData;
     std::string outputFilename;
     std::string outputData;
-    
+
     printf("Enter the filename: ");
     std::getline(std::cin >> std::ws, inputFilename);
     std::cout << std::endl;
 
-    if ( Tools::doesFileExist(inputFilename) == true )
+    if ( Tools::doesFileExist(inputFilename) )
     {
     std::ifstream inFileHandler(inputFilename, std::ifstream::in);
     inFileHandler.seekg(0, std::ios::end);
@@ -22,13 +22,18 @@ void myBase64Decoding(void)
     inputData.assign((std::istreambuf_iterator<char>(inFileHandler)),
                                    std::istreambuf_iterator<char>());
     };
-
+    
     outputData = Base64::Decode((inputData));
+
+    // Could not get printf to work with the Base64 decoding, guess its a incoding issue.
+    // Falling back to cout until issue is located
+    std::cout << outputData << std::endl;
     
     outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Decoded-Base64.txt";
-    if ( Tools::doesFileExist(outputFilename) == false )
+    if ( !Tools::doesFileExist(outputFilename) )
     {
         Tools::writeFile(outputData, outputFilename);
+        printf( "The output is also written to a file called %s in the folder you have the program in", outputFilename.c_str() );
     }
 }
 
@@ -60,7 +65,7 @@ void myBase64DecodingString(void)
 
     outputData = Base64::Decode(inputData);
 
-    printf( "\n%s\n", outputData.c_str() );
+    std::cout << std::endl << outputData << std::endl;
 
     outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-From_String-Decoded-Base64.txt";
     outStatusCode = Tools::doesFileExist(outputFilename);
@@ -118,24 +123,20 @@ void myBase64Encoding(const std::string &data)
 void my8BitBinaryEncoding(void)
 {
 
-    bool inputFileStatusCode;
-    bool outputFileStatusCode;
-
     std::string inputFilename;
     std::string outputFilename;
     std::string inputDataBuffer;
     std::string outputData;
+    std::vector<std::bitset<8>> binaryOutputVector;
+    binaryOutputVector.reserve(100);
 
     printf("Enter Filename: ");
     std::getline(std::cin >> std::ws, inputFilename);
     std::cout << std::endl;
 
-    inputFileStatusCode = Tools::doesFileExist(inputFilename);
+    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Encoded.txt";
 
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + inputFilename + "-Binary-Decoded.txt";
-    outputFileStatusCode = Tools::doesFileExist(outputFilename);
-
-    if ( inputFileStatusCode == true  && outputFileStatusCode == false )
+    if ( Tools::doesFileExist(inputFilename) )
     {
         std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
         inputFileHandler.seekg(0, std::ios::end);
@@ -144,8 +145,6 @@ void my8BitBinaryEncoding(void)
         inputDataBuffer.assign((std::istreambuf_iterator<char>(inputFileHandler)),
                                 std::istreambuf_iterator<char>());
         
-        std::vector<std::bitset<8>> binaryOutputVector;
-        binaryOutputVector.reserve(100);
 
         for ( std::size_t i = 0; i < inputDataBuffer.size(); i++ )
         {
@@ -153,15 +152,27 @@ void my8BitBinaryEncoding(void)
 
         }
 
+        // Printing the vector to the console
+        for ( size_t i = 0; i < binaryOutputVector.size(); i++ )
+        {
+            std::cout << binaryOutputVector[i];
+            if ( i != binaryOutputVector.size() - 1 )
+            {
+                std::cout << ' ';
+            }
+        }
+    }
+
+    if ( !Tools::doesFileExist(outputFilename) )
+    {
         Tools::writeFile(binaryOutputVector, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in", outputFilename.c_str() );
+        printf( "The output is written to a file called %s in the folder you have the program in\n\n", outputFilename.c_str() );
     }
 
 }
 
 void my8BitBinaryEncoding(const std::string &data)
 {
-    bool outputFileStatusCode;
     std::vector<std::bitset<8>> binaryOutputVector;
     std::string outputFilename;
 
@@ -171,8 +182,8 @@ void my8BitBinaryEncoding(const std::string &data)
     }
 
     outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-8Bit-Binary.txt";
-    outputFileStatusCode = Tools::doesFileExist(outputFilename);
-    if ( outputFileStatusCode == false )
+
+    if ( !Tools::doesFileExist(outputFilename) )
     {
         Tools::writeFile(binaryOutputVector, outputFilename);
         printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
