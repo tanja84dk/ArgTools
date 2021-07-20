@@ -2,8 +2,6 @@
 #include "pxx.h"
 #include <ArgToolsConfig.h>
 
-char timeBuffer[80];
-
 void myBase64Decoding(void)
 {
     std::string inFile;
@@ -272,27 +270,6 @@ void my8BitBinaryDecoding(const std::string &inputFilename)
 
 }
 
-void printFile(const std::string &inputFile)
-{
-    bool printFileStatusCode;
-    printFileStatusCode = Tools::doesFileExist(inputFile);
-    if (printFileStatusCode == true)
-    {
-        //cout << "Status Code: " << printFileStatusCode << ". The File Exist." << endl << "The Encoding String Goes Here" << endl;
-        std::cout << std::endl << std::endl;
-        std::ifstream fileHandler(inputFile, std::ifstream::in);
-        if (fileHandler.is_open())
-        {
-            std::cout << fileHandler.rdbuf();
-        };
-        fileHandler.close();
-    }
-    else
-    {
-        std::cout << "Status Code: " << printFileStatusCode << ". The File Does Not Exist" << std::endl;
-    }
-};
-
 void SubMenuBase64(void)
 {
     std::string inputString;
@@ -301,14 +278,14 @@ void SubMenuBase64(void)
     {
         short unsigned int menuChoice;
 
-        std::cout << "----------------------------" << std::endl;
-        std::cout << "      Base64   "              << std::endl;
-        std::cout << "----------------------------" << std::endl;
-        std::cout << "[1] Encoding From File"       << std::endl;
-        std::cout << "[2] Decoding From File"       << std::endl;
-        std::cout << "[3] Encoding From String"     << std::endl;
-        std::cout << "[4] Decoding From String"     << std::endl;
-        std::cout << "[0] Back To Main Menu"        << std::endl;
+        printf("----------------------------\n"
+               "      Base64   \n"
+               "----------------------------\n"
+               "[1] Encoding From File\n"
+               "[2] Decoding From File\n"
+               "[3] Encoding From String\n"
+               "[4] Decoding From String\n"
+               "[0] Back To Main Menu\n")
         std::cin >> menuChoice;
 
 
@@ -316,21 +293,18 @@ void SubMenuBase64(void)
         {
         case 1:
             //Encoding Base64 From File
-            //Code
             std::cout << "You chose Encoding From File" << std::endl;
             myBase64Encoding();
             _exitBase64 = true;
             break;
         case 2:
             //Decoding Base64 From File
-            //Code
             std::cout << "You chose Decoding From File" << std::endl;
             myBase64Decoding();
             _exitBase64 = true;
             break;
         case 3:
             //Encoding Base64 From String
-            //Code
             std::cout << "You chose Encoding from string" << std::endl;
             std::cout << "Enter the string: ";
             std::getline(std::cin >> std::ws, inputString);
@@ -339,7 +313,6 @@ void SubMenuBase64(void)
             break;
         case 4:
             //Decoding Base64 From String
-            //Code
             std::cout << "You chose Decoding from string" << std::endl;
             std::cout << "Enter the string: ";
             std::getline(std::cin >> std::ws, inputString);
@@ -349,8 +322,8 @@ void SubMenuBase64(void)
         case 0:
             _exitBase64 = true;
         default:
-            std::cout << "The option " << menuChoice << " does not exist" << std::endl;
-            std::cout << "Redirecting to main menu" << std::endl;
+            printf("The option %d does not exist\n"
+                   "Redirecting to main menu\n", menuChoice);
             _exitBase64 = true;
             break;
         }
@@ -366,14 +339,14 @@ void SubMenu8bit(void)
     {
         short unsigned int menuChoice;
 
-        std::cout << "----------------------------" << std::endl;
-        std::cout << "      8 bit Binary          " << std::endl;
-        std::cout << "----------------------------" << std::endl;
-        std::cout << "[1] Encoding From File"       << std::endl;
-        std::cout << "[ ] Decoding From File"       << std::endl;
-        std::cout << "[ ] Encoding From String"     << std::endl;
-        std::cout << "[4] Decoding From String"     << std::endl;
-        std::cout << "[0] Back To Main Menu"        << std::endl;
+        printf("----------------------------\n"
+               "      8 bit Binary          \n"
+               "----------------------------\n"
+               "[1] Encoding From File\n"
+               "[2] Decoding From File\n"
+               "[3] Encoding From String\n"
+               "[4] Decoding From String\n"
+               "[0] Back To Main Menu\n")
         std::cin >> menuChoice;
 
 
@@ -410,8 +383,8 @@ void SubMenu8bit(void)
             exitBinaryMenu = true;
             break;
         default:
-            std::cout << "The option " << menuChoice << " does not exist" << std::endl;
-            std::cout << "Redirecting to main menu" << std::endl;
+            printf("The option %d does not exist\n"
+                   "Redirecting to main menu\n", menuChoice);
             exitBinaryMenu = true;
             break;
         }
@@ -425,18 +398,18 @@ void MainMenu(void)
     while (1)
     {
         short unsigned int menuChoice;
-        std::cout << "----------------------------" << std::endl;
-        std::cout << "      Main Menu             " << std::endl;
-        std::cout << "----------------------------" << std::endl;
-        std::cout << "[1] Base64"                   << std::endl;
-        std::cout << "[2] 8Bit Binary"              << std::endl;
-        std::cout << "[3] Test Print A File"        << std::endl;
-        std::cout << "[4] Test Encode String"       << std::endl;
-        std::cout << "[5] Test Print File"          << std::endl;
-        std::cout << "[0] Exit"                     << std::endl;
+        printf("----------------------------\n"
+               "      Main Menu             \n"
+               "----------------------------\n"
+               "[1] Base64\n"
+               "[2] 8Bit Binary\n"
+               "[3] Test Print A File\n"
+               "[4] Test Encode String\n"
+               "[5] Test Print File\n"
+               "[0] Exit\n")
 
         std::cin >> menuChoice;
-        std::cout << "\n" << std::endl;
+        printf("\n\n");
 
         switch (menuChoice)
         {
@@ -447,15 +420,15 @@ void MainMenu(void)
             SubMenu8bit();
             break;
         case 3:
-            std::cout << "Enter A Filename: ";
+            printf("Enter A Filename: ");
             std::cin >> inputFile;
-            printFile(inputFile);
+            Tools::printFile(inputFile);
             break;
         case 4:
             myBase64Encoding();
             break;
         case 5:
-            std::cout << "Enter The Filename: ";
+            printf("Enter The Filename: ");
             std::getline(std::cin >> std::ws, inputFile);
             Tools::printFile(inputFile);
             break;
@@ -471,9 +444,7 @@ void MainMenu(void)
 int main(int argc, char** argv)
 {
     std::cout << argv[0] << std::endl;
-    std::cout << "This is Version " << ArgTools_VERSION_MAJOR << "."
-                                    << ArgTools_VERSION_MINOR << "-dev"
-                                    << std::endl;
+    printf("This is Version %d.%d-dev\n", ArgTools_VERSION_MAJOR, ArgTools_VERSION_MINOR);
     MainMenu();
 
     return 0;
