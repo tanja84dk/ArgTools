@@ -33,7 +33,7 @@ void myBase32Decoding(void)
     if ( !Tools::doesFileExist(outputFilename) )
     {
         Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in", outputFilename.c_str() );
+        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
     }
 }
 
@@ -71,7 +71,7 @@ void myBase32DecodingString(void)
     outStatusCode = Tools::doesFileExist(outputFilename);
         if (outStatusCode == false) {
             Tools::writeFile(outputData, outputFilename);
-            printf( "The output is also written to a file called %s in the folder you have the program in", outputFilename.c_str() );
+            printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
     };
 };
 
@@ -151,7 +151,7 @@ void myBase64Decoding(void)
     if ( !Tools::doesFileExist(outputFilename) )
     {
         Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in", outputFilename.c_str() );
+        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
     }
 }
 
@@ -189,7 +189,7 @@ void myBase64DecodingString(void)
     outStatusCode = Tools::doesFileExist(outputFilename);
         if (outStatusCode == false) {
             Tools::writeFile(outputData, outputFilename);
-            printf( "The output is also written to a file called %s in the folder you have the program in", outputFilename.c_str() );
+            printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
     };
 };
 
