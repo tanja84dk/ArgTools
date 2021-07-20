@@ -1,3 +1,7 @@
+## Compiling from source
+ - git clone --recurse-submodules https://github.com/tanja84dk/ArgTools
+ - Tested compiled with VS Code and Clang12.0.1 and CMake
+
 ## Used External libraries
  - [**Base64**](https://github.com/rhymu8354/Base64) created by [***Richard Walters***](https://github.com/rhymu8354)
  - [**Utf8**](https://github.com/rhymu8354/Utf8) created by [***Richard Walters***](https://github.com/rhymu8354)
