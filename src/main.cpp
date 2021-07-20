@@ -62,24 +62,20 @@ void myBase64Decoding(const std::string &inputData)
 
 void myBase64DecodingString(void)
 {
-    std::cout << "Enter the string" << std::endl;
-    std::string __inputTemp;
-    std::getline(std::cin >> std::ws, __inputTemp);
-    int __myBase64DecodingStringStatusCode;
-    std::string __myBase64DecodingStringTemp;
-    std::string __myBase64DecodingStringOutput;
-    std::string __myBase64DecodingStringOutputFilename;
+    printf("Enter the string");
+    std::string inputData;
+    std::getline(std::cin >> std::ws, inputData);
+    int outStatusCode;
+    std::string outputData;
+    std::string outputFilename;
 
-    __myBase64DecodingStringOutput = Base64::Decode((__inputTemp));
+    outputData = Base64::Decode(inputData);
 
-    __myBase64DecodingStringOutputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-From_String-Decoded-Base64.txt";
-    __myBase64DecodingStringStatusCode = Tools::doesFileExist(__myBase64DecodingStringOutputFilename);
-        if (__myBase64DecodingStringStatusCode == 404) {
-            std::ofstream __myBase64DecodingStringOutputFile;
-            __myBase64DecodingStringOutputFile.open(__myBase64DecodingStringOutputFilename);
-            __myBase64DecodingStringOutputFile << __myBase64DecodingStringOutput;
-            __myBase64DecodingStringOutputFile.close();
-            std::cout << "The output is also written to a file called " << __myBase64DecodingStringOutputFilename << " in the folder you have the program in" << std::endl;
+    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-From_String-Decoded-Base64.txt";
+    outStatusCode = Tools::doesFileExist(outputFilename);
+        if (outStatusCode == 404) {
+            Tools::writeFile(outputData, outputFilename);
+            printf( "The output is also written to a file called %s in the folder you have the program in", outputFilename.c_str() );
     };
 };
 
