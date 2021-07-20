@@ -12,8 +12,7 @@ void myBase64DecodingString(void);
 
 void my8BitBinaryEncoding(void);
 void my8BitBinaryEncoding(const std::string &data);
-void my8BitBinaryDecoding(const std::string &inputFilename);
-//std::string my8BitBinaryDecoding(const std::string &data);
+void my8BitBinaryDecodingString(const std::string &inputFilename);
 
 void SubMenuBase64(void);
 void SubMenu8bit(void);

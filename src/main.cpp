@@ -191,13 +191,13 @@ void my8BitBinaryEncoding(const std::string &data)
     
 }
 
-void my8BitBinaryDecoding(const std::string &inputFilename)
+void my8BitBinaryDecodingString(const std::string &inputFilename)
 {
 
     std::string outputFilename;
     std::string inputDataBuffer;
     std::string outputData;
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + inputFilename + "-Binary-Decoded.txt";
+    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Decoded.txt";
 
     if ( Tools::doesFileExist(inputFilename) == true )
     {
@@ -308,7 +308,6 @@ void SubMenu8bit(void)
                "[1] Encoding From File\n"
                "[2] Decoding From File\n"
                "[3] Encoding From String\n"
-               "[4] Decoding From String\n"
                "[0] Back To Main Menu\n"
                "----------------------------\n"
                "Enter your choice: ");
@@ -327,22 +326,26 @@ void SubMenu8bit(void)
             break;
         case 2:
             //Decoding Binary From File
-            std::cout << "You chose Decoding From File" << std::endl;
+            printf("Enter the filename: ");
+            std::getline(std::cin >> std::ws, inputString);
+            std::cout << std::endl;
+            my8BitBinaryDecodingString(inputString);
             exitBinaryMenu = true;
             break;
         case 3:
             //Encoding Binary From String
             std::cout << "Enter the string: ";
             std::getline(std::cin >> std::ws, inputString);
+            std::cout << std::endl;
             my8BitBinaryEncoding(inputString);
             exitBinaryMenu = true;
             break;
         case 4:
             //Decoding Binary From String
-            std::cout << "Enter the string: ";
-            std::getline(std::cin >> std::ws, inputString);
-            my8BitBinaryDecoding(inputString);
-            exitBinaryMenu = true;
+            //std::cout << "Enter the string: ";
+            //std::getline(std::cin >> std::ws, inputString);
+            //my8BitBinaryDecoding(inputString);
+            //exitBinaryMenu = true;
             break;
         case 0:
             exitBinaryMenu = true;
