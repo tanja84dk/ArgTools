@@ -28,6 +28,6 @@ add_subdirectory(Libraries/External/googletest)
 
 #target_link_libraries(Include/Base64/Base64 LINK_PUBLIC ${PROJECT_NAME})
 # TODO: Add tests and install targets if needed.
-
-#add_subdirectory(src/test)
-
+if(DEFINED ENABLE_TEST)
+    add_subdirectory(src/test)
+endif(DEFINED ENABLE_TEST)
