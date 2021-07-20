@@ -39,7 +39,6 @@ void myBase32Decoding(void)
 
 void myBase32Decoding(const std::string &inputData)
 {
-    bool statusCode;
     std::string outputData;
     std::string outputFilename;
     outputData = Base32::Decode(inputData);
@@ -65,6 +64,8 @@ void myBase32DecodingString(void)
 
     outputData = Base32::Decode(inputData);
 
+    // Could not get printf to work with the Base32 decoding, guess its a incoding issue.
+    // Falling back to cout until issue is located    
     std::cout << std::endl << outputData << std::endl;
 
     outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-From_String-Decoded-Base32.txt";
@@ -77,7 +78,6 @@ void myBase32DecodingString(void)
 
 void myBase32Encoding(void)
 {
-    bool statusCode;
     std::string inputFilename;
     printf("Enter Filename: ");
     std::getline(std::cin >> std::ws, inputFilename);
@@ -157,7 +157,6 @@ void myBase64Decoding(void)
 
 void myBase64Decoding(const std::string &inputData)
 {
-    bool statusCode;
     std::string outputData;
     std::string outputFilename;
     outputData = Base64::Decode(inputData);
@@ -195,7 +194,6 @@ void myBase64DecodingString(void)
 
 void myBase64Encoding(void)
 {
-    bool statusCode;
     std::string inputFilename;
     printf("Enter Filename: ");
     std::getline(std::cin >> std::ws, inputFilename);
