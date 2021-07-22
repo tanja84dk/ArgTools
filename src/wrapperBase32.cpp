@@ -1,6 +1,4 @@
 #include "wrapperBase32.h"
-#include <Tools/Tools.h>
-#include <Base64/Base32.hpp>
 
 void myBase32Decoding(void)
 {
