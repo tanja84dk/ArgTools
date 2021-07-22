@@ -175,13 +175,6 @@ void subMenu8bit(void)
             my8BitBinaryEncoding(inputString);
             exitBinaryMenu = true;
             break;
-        case 4:
-            //Decoding Binary From String
-            //std::cout << "Enter the string: ";
-            //std::getline(std::cin >> std::ws, inputString);
-            //my8BitBinaryDecoding(inputString);
-            //exitBinaryMenu = true;
-            break;
         case 0:
             exitBinaryMenu = true;
             break;
@@ -207,8 +200,8 @@ void subMenuCeasar()
         printf("----------------------------\n"
                "      Ceasar\n"
                "----------------------------\n"
-               "[1] Encoding From File\n"
-               "[2] Decoding From File\n"
+               "[ ] Encoding From File\n"
+               "[ ] Decoding From File\n"
                "[3] Encoding From String\n"
                "[4] Decoding From String\n"
                "[9] Bruteforce The Key\n"
@@ -233,6 +226,11 @@ void subMenuCeasar()
             exitCeasarMenu = true;
             break;
         case 4:
+            printf("Enter the string to decode: ");
+            std::getline(std::cin >> std::ws, inputData);
+            printf("\nEnter the numeric shifting chipher key: ");
+            std::cin >> shiftKeyValue;
+            ceasarDecoding(shiftKeyValue, inputData);
             exitCeasarMenu= true;
             break;
         case 9:
@@ -257,17 +255,19 @@ void mainMenu(void)
     {
         short unsigned int menuChoice;
         printf("----------------------------\n"
-               "      Main Menu             \n"
+               "      Main Menu\n"
                "----------------------------\n"
                "[1] Base32\n"
                "[2] Base64\n"
                "[3] 8Bit Binary\n"
                "[4] Ceasar Chipher\n"
                "[6] Test Print File\n"
-               "[9] Test Case\n"
                "[0] Exit\n"
                "----------------------------\n"
-               "Enter your choice: ");
+               "This is Version %d.%d-dev\n"
+               "----------------------------\n"
+               "Enter your choice: ",
+               ArgTools_VERSION_MAJOR, ArgTools_VERSION_MINOR);
 
         std::cin >> menuChoice;
         std::cout << std::endl;
@@ -305,7 +305,6 @@ void mainMenu(void)
 
 int main(int argc, char** argv)
 {
-    std::cout << argv[0] << std::endl;
     printf("This is Version %d.%d-dev\n", ArgTools_VERSION_MAJOR, ArgTools_VERSION_MINOR);
     mainMenu();
 
