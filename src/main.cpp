@@ -1,351 +1,5 @@
 #include "main.h"
-#include "pxx.h"
-#include <ArgToolsConfig.h>
 
-void myBase32Decoding(void)
-{
-    std::string inputFilename;
-    std::string inputData;
-    std::string outputFilename;
-    std::string outputData;
-
-    printf("Enter the filename: ");
-    std::getline(std::cin >> std::ws, inputFilename);
-    std::cout << std::endl;
-
-    if ( Tools::doesFileExist(inputFilename) )
-    {
-    std::ifstream inFileHandler(inputFilename, std::ifstream::in);
-    inFileHandler.seekg(0, std::ios::end);
-    inputData.reserve(inFileHandler.tellg());
-    inFileHandler.seekg(0, std::ios::beg);
-    inputData.assign((std::istreambuf_iterator<char>(inFileHandler)),
-                                   std::istreambuf_iterator<char>());
-    };
-    
-    outputData = Base32::Decode((inputData));
-
-    // Could not get printf to work with the Base64 decoding, guess its a incoding issue.
-    // Falling back to cout until issue is located
-    std::cout << outputData << std::endl;
-    
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Decoded-Base32.txt";
-    if ( !Tools::doesFileExist(outputFilename) )
-    {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    }
-}
-
-void myBase32Decoding(const std::string &inputData)
-{
-    std::string outputData;
-    std::string outputFilename;
-    outputData = Base32::Decode(inputData);
-
-    printf( "\n%s\n", outputData.c_str() );
-
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Decoded-Base32.txt";
-    if ( Tools::doesFileExist(outputFilename) == false )
-    {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    }
-}
-
-void myBase32DecodingString(void)
-{
-    printf("Enter the string");
-    std::string inputData;
-    std::getline(std::cin >> std::ws, inputData);
-    int outStatusCode;
-    std::string outputData;
-    std::string outputFilename;
-
-    outputData = Base32::Decode(inputData);
-
-    // Could not get printf to work with the Base32 decoding, guess its a incoding issue.
-    // Falling back to cout until issue is located    
-    std::cout << std::endl << outputData << std::endl;
-
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-From_String-Decoded-Base32.txt";
-    outStatusCode = Tools::doesFileExist(outputFilename);
-        if (outStatusCode == false) {
-            Tools::writeFile(outputData, outputFilename);
-            printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    };
-};
-
-void myBase32Encoding(void)
-{
-    std::string inputFilename;
-    printf("Enter Filename: ");
-    std::getline(std::cin >> std::ws, inputFilename);
-    std::string inputData;
-    std::string outputData;
-    std::string outputFilename;
-    std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
-    inputFileHandler.seekg(0, std::ios::end);
-    inputData.reserve(inputFileHandler.tellg());
-    inputFileHandler.seekg(0, std::ios::beg);
-    inputData.assign((std::istreambuf_iterator<char>(inputFileHandler)),
-                                   std::istreambuf_iterator<char>());
-
-    outputData = Base32::Encode(inputData);
-
-    printf( "\n%s\n", outputData.c_str() );
-
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Encoded-Base32.txt";
-    if (Tools::doesFileExist(outputFilename) == false) {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    }
-};
-
-void myBase32Encoding(const std::string &data)
-{
-    bool statusCode;
-    std::string outputData;
-    std::string outputFilename;
-
-    outputData = Base32::Encode((data));
-
-    printf( "\n%s\n", outputData.c_str() );
-
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-Base32.txt";
-    statusCode = Tools::doesFileExist(outputFilename);
-    if (statusCode == false) {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    }
-}
-
-void myBase64Decoding(void)
-{
-    std::string inputFilename;
-    std::string inputData;
-    std::string outputFilename;
-    std::string outputData;
-
-    printf("Enter the filename: ");
-    std::getline(std::cin >> std::ws, inputFilename);
-    std::cout << std::endl;
-
-    if ( Tools::doesFileExist(inputFilename) )
-    {
-    std::ifstream inFileHandler(inputFilename, std::ifstream::in);
-    inFileHandler.seekg(0, std::ios::end);
-    inputData.reserve(inFileHandler.tellg());
-    inFileHandler.seekg(0, std::ios::beg);
-    inputData.assign((std::istreambuf_iterator<char>(inFileHandler)),
-                                   std::istreambuf_iterator<char>());
-    };
-    
-    outputData = Base64::Decode((inputData));
-
-    // Could not get printf to work with the Base64 decoding, guess its a incoding issue.
-    // Falling back to cout until issue is located
-    std::cout << outputData << std::endl;
-    
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Decoded-Base64.txt";
-    if ( !Tools::doesFileExist(outputFilename) )
-    {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    }
-}
-
-void myBase64Decoding(const std::string &inputData)
-{
-    std::string outputData;
-    std::string outputFilename;
-    outputData = Base64::Decode(inputData);
-
-    printf( "\n%s\n", outputData.c_str() );
-
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Decoded-Base64.txt";
-    if ( Tools::doesFileExist(outputFilename) == false )
-    {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    }
-}
-
-void myBase64DecodingString(void)
-{
-    printf("Enter the string");
-    std::string inputData;
-    std::getline(std::cin >> std::ws, inputData);
-    int outStatusCode;
-    std::string outputData;
-    std::string outputFilename;
-
-    outputData = Base64::Decode(inputData);
-
-    std::cout << std::endl << outputData << std::endl;
-
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-From_String-Decoded-Base64.txt";
-    outStatusCode = Tools::doesFileExist(outputFilename);
-        if (outStatusCode == false) {
-            Tools::writeFile(outputData, outputFilename);
-            printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    };
-};
-
-void myBase64Encoding(void)
-{
-    std::string inputFilename;
-    printf("Enter Filename: ");
-    std::getline(std::cin >> std::ws, inputFilename);
-    std::string inputData;
-    std::string outputData;
-    std::string outputFilename;
-    std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
-    inputFileHandler.seekg(0, std::ios::end);
-    inputData.reserve(inputFileHandler.tellg());
-    inputFileHandler.seekg(0, std::ios::beg);
-    inputData.assign((std::istreambuf_iterator<char>(inputFileHandler)),
-                                   std::istreambuf_iterator<char>());
-
-    outputData = Base64::Encode(inputData);
-
-    printf( "\n%s\n", outputData.c_str() );
-
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Encoded-Base64.txt";
-    if (Tools::doesFileExist(outputFilename) == false) {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    }
-};
-
-void myBase64Encoding(const std::string &data)
-{
-    bool statusCode;
-    std::string outputData;
-    std::string outputFilename;
-
-    outputData = Base64::Encode((data));
-
-    printf( "\n%s\n", outputData.c_str() );
-
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-Base64.txt";
-    statusCode = Tools::doesFileExist(outputFilename);
-    if (statusCode == false) {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    }
-}
-
-void my8BitBinaryEncoding(void)
-{
-
-    std::string inputFilename;
-    std::string outputFilename;
-    std::string inputDataBuffer;
-    std::string outputData;
-    std::vector<std::bitset<8>> binaryOutputVector;
-    binaryOutputVector.reserve(100);
-
-    printf("Enter Filename: ");
-    std::getline(std::cin >> std::ws, inputFilename);
-    std::cout << std::endl;
-
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Encoded.txt";
-
-    if ( Tools::doesFileExist(inputFilename) )
-    {
-        std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
-        inputFileHandler.seekg(0, std::ios::end);
-        inputDataBuffer.reserve(inputFileHandler.tellg());
-        inputFileHandler.seekg(0, std::ios::beg);
-        inputDataBuffer.assign((std::istreambuf_iterator<char>(inputFileHandler)),
-                                std::istreambuf_iterator<char>());
-        
-
-        for ( std::size_t i = 0; i < inputDataBuffer.size(); i++ )
-        {
-            binaryOutputVector.push_back(std::bitset<8>(inputDataBuffer.c_str()[i]));
-
-        }
-
-        // Printing the vector to the console
-        for ( size_t i = 0; i < binaryOutputVector.size(); i++ )
-        {
-            std::cout << binaryOutputVector[i];
-            if ( i != binaryOutputVector.size() - 1 )
-            {
-                std::cout << ' ';
-            }
-        }
-        std::cout << std::endl;
-    }
-
-    if ( !Tools::doesFileExist(outputFilename) )
-    {
-        Tools::writeFile(binaryOutputVector, outputFilename);
-        printf( "The output is written to a file called %s in the folder you have the program in\n\n", outputFilename.c_str() );
-    }
-
-}
-
-void my8BitBinaryEncoding(const std::string &data)
-{
-    std::vector<std::bitset<8>> binaryOutputVector;
-    std::string outputFilename;
-
-    for (std::size_t i = 0; i < int(data.size()); i++ )
-    {
-        binaryOutputVector.push_back(std::bitset<8>(data.c_str()[i]));
-    }
-
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-8Bit-Binary.txt";
-
-    if ( !Tools::doesFileExist(outputFilename) )
-    {
-        Tools::writeFile(binaryOutputVector, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    }
-    
-}
-
-void my8BitBinaryDecodingString(const std::string &inputFilename)
-{
-
-    std::string outputFilename;
-    std::string inputDataBuffer;
-    std::string outputData;
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Decoded.txt";
-
-    if ( Tools::doesFileExist(inputFilename) == true )
-    {
-        std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
-        inputFileHandler.seekg(0, std::ios::end);
-        inputDataBuffer.reserve(inputFileHandler.tellg());
-        inputFileHandler.seekg(0, std::ios::beg);
-        inputDataBuffer.assign((std::istreambuf_iterator<char>(inputFileHandler)),
-                                std::istreambuf_iterator<char>());
-        
-        std::stringstream binaryStringStream(inputDataBuffer);
-
-        while (binaryStringStream.good())
-        {
-            std::bitset<8> bits;
-            binaryStringStream >> bits;
-            char characterDecoded = char(bits.to_ulong());
-            outputData += characterDecoded;
-        }
-
-        printf( "\n%s\n", outputData.c_str() );
-    }
-    
-
-    if ( Tools::doesFileExist(outputFilename) == false )
-    {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    }
-
-}
 
 void subMenuBase32(void)
 {
@@ -411,7 +65,7 @@ void subMenuBase32(void)
     }
 }
 
-void SubMenuBase64(void)
+void subMenuBase64(void)
 {
     std::string inputString;
     bool _exitBase64 = false;
@@ -475,7 +129,7 @@ void SubMenuBase64(void)
     }
 }
 
-void SubMenu8bit(void)
+void subMenu8bit(void)
 {
     std::string inputString;
     bool exitBinaryMenu = false;
@@ -499,7 +153,7 @@ void SubMenu8bit(void)
         {
         case 1:
             //Encoding Binary From File
-            std::cout << "You chose Encoding From File" << std::endl;
+            printf("You chose Encoding From File\n");
             //std::cout << "Enter filename: ";
             //std::getline(std::cin >> std::ws, inputString);
             my8BitBinaryEncoding();
@@ -541,7 +195,62 @@ void SubMenu8bit(void)
     }
 }
 
-void MainMenu(void)
+void subMenuCeasar()
+{
+    std::string inputData;
+    short unsigned int shiftKeyValue;
+    bool exitCeasarMenu = false;
+    while ( exitCeasarMenu == false )
+    {
+        short unsigned int menuChoice;
+
+        printf("----------------------------\n"
+               "      Ceasar\n"
+               "----------------------------\n"
+               "[1] Encoding From File\n"
+               "[2] Decoding From File\n"
+               "[3] Encoding From String\n"
+               "[4] Decoding From String\n"
+               "[9] Bruteforce The Key\n"
+               "[0] Back To Main Menu\n"
+               "----------------------------\n"
+               "Enter your choice: ");
+        std::cin >> menuChoice;
+        std::cout << std::endl;
+
+        switch (menuChoice)
+        {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            printf("Enter the string to encode: ");
+            std::getline(std::cin >> std::ws, inputData);
+            printf("\nEnter the numeric shifting chipher wissed to use: ");
+            std::cin >> shiftKeyValue;
+            caesarEncoding(shiftKeyValue, inputData);
+            exitCeasarMenu = true;
+            break;
+        case 4:
+            exitCeasarMenu= true;
+            break;
+        case 9:
+            printf("Enter the string to bruteforce: ");
+            std::getline(std::cin >> std::ws, inputData);
+            ceasarDecodingBruteforce(inputData);
+            break;
+        case 0:
+        exitCeasarMenu = true;
+            break;
+        default:
+            exitCeasarMenu = true;
+            break;
+        }
+    }
+}
+
+void mainMenu(void)
 {
     std::string inputFile;
     while (1)
@@ -553,7 +262,9 @@ void MainMenu(void)
                "[1] Base32\n"
                "[2] Base64\n"
                "[3] 8Bit Binary\n"
+               "[4] Ceasar Chipher\n"
                "[6] Test Print File\n"
+               "[9] Test Case\n"
                "[0] Exit\n"
                "----------------------------\n"
                "Enter your choice: ");
@@ -567,15 +278,21 @@ void MainMenu(void)
             subMenuBase32();
             break;
         case 2:
-            SubMenuBase64();
+            subMenuBase64();
             break;
         case 3:
-            SubMenu8bit();
+            subMenu8bit();
+            break;
+        case  4:
+            subMenuCeasar();
             break;
         case 6:
             printf("Enter The Filename: ");
             std::getline(std::cin >> std::ws, inputFile);
             Tools::printFile(inputFile);
+            break;
+        case 9:
+            ceasarDecoding(4, "Xlmw aew e xvmyqtl!");
             break;
         case 0:
             exit(0);
@@ -590,7 +307,7 @@ int main(int argc, char** argv)
 {
     std::cout << argv[0] << std::endl;
     printf("This is Version %d.%d-dev\n", ArgTools_VERSION_MAJOR, ArgTools_VERSION_MINOR);
-    MainMenu();
+    mainMenu();
 
     return 0;
 }
