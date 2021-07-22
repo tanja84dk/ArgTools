@@ -214,6 +214,12 @@ void subMenuCeasar()
         switch (menuChoice)
         {
         case 1:
+            printf("Enter the filename: ");
+            std::getline(std::cin >> std::ws, inputData);
+            printf("\nEnter the numeric shifting chipher wissed to use: ");
+            std::cin >> shiftKeyValue;
+            inputData = Tools::readFile(inputData);
+            caesarEncoding(shiftKeyValue, inputData);
             break;
         case 2:
             break;
