@@ -200,7 +200,7 @@ void subMenuCeasar()
         printf("----------------------------\n"
                "      Ceasar\n"
                "----------------------------\n"
-               "[ ] Encoding From File\n"
+               "[1] Encoding From File\n"
                "[ ] Decoding From File\n"
                "[3] Encoding From String\n"
                "[4] Decoding From String\n"
