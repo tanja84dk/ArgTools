@@ -12,8 +12,23 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 configure_file(${PROJECT_NAME}Config.h.in ${PROJECT_NAME}Config.h)
 
+set(SourceFiles
+    "src/main.cpp"
+    "src/caesarChipher.cpp"
+    "src/wrapperBase32.cpp"
+    "src/wrapperBase64.cpp"
+    "src/wrapperBinary.cpp")
+
+set(HeaderFiles
+    "src/main.h"
+    "src/pxx.h"
+    "src/caesarChipher.h"
+    "src/wrapperBase32.h"
+    "src/wrapperBase64.h"
+    "src/wrapperBinary.h")
+
 # Add source to this project's executable.
-add_executable(${PROJECT_NAME} "src/main.cpp" "src/main.h" "src/pxx.h")
+add_executable(${PROJECT_NAME} ${SourceFiles} ${HeaderFiles}) 
 
 target_link_libraries(${PROJECT_NAME} "Base64" "Tools" "Utf8")
 
