@@ -3,6 +3,8 @@
 void caesarEncoding(const int keyValue, const std::string &inputData)
 {
     std::string outputData;
+    std::string outputFilename;
+
     char charBuffer;
     for ( int i = 0; i != inputData.length(); i++ )
     {
@@ -28,13 +30,22 @@ void caesarEncoding(const int keyValue, const std::string &inputData)
 
     }
 
-
     std::cout << outputData << std::endl;
+
+    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-CeasarChipher.txt";
+
+    if ( Tools::doesFileExist(outputFilename) == false )
+    {
+        Tools::writeFile(outputData, outputFilename);
+        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
+    }
 };
 
 void ceasarDecoding(const int keyValue, const std::string &inputData)
 {
     std::string outputData;
+    std::string outputFilename;
+
     char charBuffer;
     for ( int i = 0; i != inputData.length(); i++ )
     {        
@@ -60,6 +71,14 @@ void ceasarDecoding(const int keyValue, const std::string &inputData)
     }
 
     std::cout << outputData << std::endl;
+
+    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Decoded-CeasarChipher.txt";
+
+    if ( Tools::doesFileExist(outputFilename) == false )
+    {
+        Tools::writeFile(outputData, outputFilename);
+        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
+    }
 };
 
 void ceasarDecodingBruteforce(const std::string &inputData)
