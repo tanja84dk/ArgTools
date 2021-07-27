@@ -28,7 +28,15 @@ set(HeaderFiles
     "src/wrapperBinary.h")
 
 # Add source to this project's executable.
-add_executable(${PROJECT_NAME} ${SourceFiles} ${HeaderFiles}) 
+add_executable(${PROJECT_NAME} ${SourceFiles} ${HeaderFiles})
+
+add_executable(ceasarEncodeTest "src/test/src/ceasarEncode.cpp")
+target_link_libraries(ceasarEncodeTest "Tools")
+target_include_directories(ceasarEncodeTest PUBLIC ${PROJECT_BINARY_DIR})
+
+add_executable(newCeasarTest "src/test/src/newCeasarTest.cpp")
+target_link_libraries(newCeasarTest "Tools")
+target_include_directories(newCeasarTest PUBLIC ${PROJECT_BINARY_DIR})
 
 target_link_libraries(${PROJECT_NAME} "Base64" "Tools" "Utf8")
 

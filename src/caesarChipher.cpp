@@ -1,37 +1,35 @@
 #include "caesarChipher.h"
 
-void caesarEncoding(const int keyValue, const std::string &inputData)
+void caesarEncoding(const uint_fast8_t keyValue, const std::string &inputData)
 {
-    std::string outputData;
-    std::string outputFilename;
 
-    char charBuffer;
-    for ( int i = 0; i != inputData.length(); i++ )
+    std::string outputData = "";
+    std::string outputFilename = "";
+    uint_fast8_t charTemp;
+
+    for ( uint_fast64_t i = 0; i != inputData.length(); i++ )
     {
-        charBuffer = inputData[i];
-        if ( charBuffer >= 'a' && charBuffer <= 'z')
+        charTemp = (uint_fast8_t(inputData[i]) + keyValue);
+        if ( uint_fast8_t(inputData[i] >= 'A' && uint_fast8_t(inputData[i]) <= 'Z' ) )
         {
-            charBuffer = charBuffer + keyValue;
-            if ( charBuffer > 'z' )
+            if ( charTemp > uint_fast8_t('Z') )
             {
-                charBuffer = charBuffer - 'z' + 'a' - 1;
+                charTemp = charTemp - uint_fast8_t('Z') + (uint_fast8_t('A') - 1);
             }
-            outputData += charBuffer;
-        } else if ( charBuffer >= 'A' && charBuffer <= 'Z' ) {
-            charBuffer = charBuffer + keyValue;
-            if ( charBuffer > 'Z' )
+        } else if ( uint_fast8_t(inputData[i] >= 'a' && uint_fast8_t(inputData[i]) <= 'z' ) ) {
+            if ( charTemp > uint_fast8_t('z') )
             {
-                charBuffer = charBuffer - 'Z' + 'a' - 1;
+                charTemp = charTemp - uint_fast8_t('z') + (uint_fast8_t('a') - 1);
             }
-            outputData += charBuffer;
         } else {
-            outputData += charBuffer;
+            charTemp = uint_fast8_t(inputData[i]);
         }
-
+        outputData += char(charTemp);
     }
 
     std::cout << outputData << std::endl;
 
+    #ifdef WriteFile
     outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-CeasarChipher.txt";
 
     if ( Tools::doesFileExist(outputFilename) == false )
@@ -39,35 +37,34 @@ void caesarEncoding(const int keyValue, const std::string &inputData)
         Tools::writeFile(outputData, outputFilename);
         printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
     }
+    #endif
 };
 
-void ceasarDecoding(const int keyValue, const std::string &inputData)
+void ceasarDecoding(const uint_fast8_t keyValue, const std::string &inputData)
 {
     std::string outputData;
     std::string outputFilename;
 
-    char charBuffer;
-    for ( int i = 0; i != inputData.length(); i++ )
-    {        
-        charBuffer = inputData[i];
-        if (charBuffer >= 'a' && charBuffer <= 'z')
+    uint8_t charTemp;
+
+    for ( uint_fast64_t i = 0; i != inputData.length(); i++ )
+    {
+        charTemp = uint_least8_t(inputData[i]) - keyValue;
+        if ( uint8_t(inputData[i]) >= 'a' && uint8_t(inputData[i]) <= 'z' )
         {
-            charBuffer = charBuffer - keyValue;
-            if (charBuffer < 'a')
+            if (charTemp > uint8_t('z') )
             {
-                charBuffer = charBuffer + 'z' - 'a' + 1;
+                charTemp = charTemp + 'z' - 'a' + 1;
             }
-            outputData += charBuffer;
-        } else if (charBuffer >= 'A' && charBuffer <= 'Z'){
-            charBuffer = charBuffer - keyValue;
-            if (charBuffer < 'A')
+        } else if ( uint8_t(inputData[i]) >= 'A' && uint8_t(inputData[i]) <= 'Z' ) {
+            if (charTemp > uint8_t('Z') )
             {
-                charBuffer = charBuffer + 'Z' - 'A' + 1;
+                charTemp = charTemp + 'Z' - 'A' + 1;
             }
-            outputData += charBuffer;
         } else {
-            outputData += charBuffer;
+            charTemp = uint8_t(inputData[i]);
         }
+        outputData += char(charTemp);
     }
 
     std::cout << outputData << std::endl;
@@ -86,39 +83,32 @@ void ceasarDecodingBruteforce(const std::string &inputData)
     
     for ( int keyValue = 1; keyValue < 27; keyValue++ )
     {
+        printf("Key Test: %d\n%lu\n", keyValue, inputData.length());
 
-        short unsigned int spaceCounter = 0;
+        uint8_t spaceCounter = 0;
         std::string outputData;
-        char charBuffer;
-        for ( int i = 0; i != inputData.length() && spaceCounter != 3; i++ )
-        {        
-            charBuffer = inputData[i];
-            if (charBuffer >= 'a' && charBuffer <= 'z')
+        uint8_t charTemp;
+
+        for ( uint64_t i = 0; i != inputData.length() && spaceCounter != 3; i++ )
+        {
+            charTemp = uint8_t(inputData[i]) - keyValue;
+            if (uint8_t(inputData[i]) >= 'A' && uint8_t(inputData[i]) <= 'Z' )
             {
-                charBuffer = charBuffer - keyValue;
-                if (charBuffer < 'a')
+                if ( charTemp > uint8_t('Z') )
                 {
-                    charBuffer = charBuffer + 'z' - 'a' + 1;
+                    charTemp = charTemp - uint8_t('A') + uint8_t('Z') + 1;
                 }
-                outputData += charBuffer;
-            } else if (charBuffer >= 'A' && charBuffer <= 'Z'){
-                charBuffer = charBuffer - keyValue;
-                if (charBuffer < 'A')
-                {
-                    charBuffer = charBuffer + 'Z' - 'A' + 1;
-                }
-                outputData += charBuffer;
+            }else if (charTemp > uint8_t('z')) {
+                charTemp = charTemp +- uint8_t('a') + uint8_t('z') + 1;
             } else {
-                if ( charBuffer == ' ')
+                charTemp = inputData[i];
+                if (char(charTemp) == ' ')
                 {
-                    spaceCounter ++;
-                    if (spaceCounter == 3)
-                    {
-                        std::cout << "Key Value " << keyValue << " and the data is: " << outputData << std::endl;
-                    }
+                    spaceCounter += 1;
                 }
-                outputData += charBuffer;
             }
+            outputData += char(charTemp);
         }
+        printf("\n%s\n", outputData.c_str());
     }
 }

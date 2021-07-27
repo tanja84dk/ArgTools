@@ -191,7 +191,7 @@ void subMenu8bit(void)
 void subMenuCeasar()
 {
     std::string inputData;
-    short unsigned int shiftKeyValue;
+    uint_fast8_t shiftKeyValue;
     bool exitCeasarMenu = false;
     while ( exitCeasarMenu == false )
     {
@@ -221,6 +221,11 @@ void subMenuCeasar()
             caesarEncoding(shiftKeyValue, Tools::readFile(inputData));
             break;
         case 2:
+            printf("Enter the filename: ");
+            std::getline(std::cin >> std::ws, inputData);
+            printf("\nEnter the numeric shifting chipher: ");
+            std::cin >> shiftKeyValue;
+            ceasarDecoding(shiftKeyValue, Tools::readFile(inputData));
             break;
         case 3:
             printf("Enter the string to encode: ");
