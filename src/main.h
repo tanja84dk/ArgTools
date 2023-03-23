@@ -1,7 +1,7 @@
 #pragma once
 
 #include "pxx.h"
-#include <Tools/Tools.h>
+#include <Tanja84dk/Tools/Tools.h>
 #include "caesarChipher.h"
 #include "wrapperBase32.h"
 #include "wrapperBase64.h"

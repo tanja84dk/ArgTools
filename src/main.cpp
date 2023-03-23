@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 void subMenuBase32(void)
 {
     std::string inputString;
@@ -22,23 +21,22 @@ void subMenuBase32(void)
         std::cin >> menuChoice;
         std::cout << std::endl;
 
-
         switch (menuChoice)
         {
         case 1:
-            //Encoding Base64 From File
+            // Encoding Base64 From File
             printf("You chose Encoding From File\n");
             myBase32Encoding();
             _exitBase32 = true;
             break;
         case 2:
-            //Decoding Base64 From File
+            // Decoding Base64 From File
             printf("You chose Decoding From File\n");
             myBase32Decoding();
             _exitBase32 = true;
             break;
         case 3:
-            //Encoding Base64 From String
+            // Encoding Base64 From String
             printf("You chose Decoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, inputString);
@@ -46,7 +44,7 @@ void subMenuBase32(void)
             _exitBase32 = true;
             break;
         case 4:
-            //Decoding Base64 From String
+            // Decoding Base64 From String
             printf("You chose Decoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, inputString);
@@ -57,11 +55,11 @@ void subMenuBase32(void)
             _exitBase32 = true;
         default:
             printf("The option %d does not exist\n"
-                   "Redirecting to main menu\n\n", menuChoice);
+                   "Redirecting to main menu\n\n",
+                   menuChoice);
             _exitBase32 = true;
             break;
         }
-
     }
 }
 
@@ -86,23 +84,22 @@ void subMenuBase64(void)
         std::cin >> menuChoice;
         std::cout << std::endl;
 
-
         switch (menuChoice)
         {
         case 1:
-            //Encoding Base64 From File
+            // Encoding Base64 From File
             printf("You chose Encoding From File\n");
             myBase64Encoding();
             _exitBase64 = true;
             break;
         case 2:
-            //Decoding Base64 From File
+            // Decoding Base64 From File
             printf("You chose Decoding From File\n");
             myBase64Decoding();
             _exitBase64 = true;
             break;
         case 3:
-            //Encoding Base64 From String
+            // Encoding Base64 From String
             printf("You chose Decoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, inputString);
@@ -110,7 +107,7 @@ void subMenuBase64(void)
             _exitBase64 = true;
             break;
         case 4:
-            //Decoding Base64 From String
+            // Decoding Base64 From String
             printf("You chose Decoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, inputString);
@@ -121,11 +118,11 @@ void subMenuBase64(void)
             _exitBase64 = true;
         default:
             printf("The option %d does not exist\n"
-                   "Redirecting to main menu\n\n", menuChoice);
+                   "Redirecting to main menu\n\n",
+                   menuChoice);
             _exitBase64 = true;
             break;
         }
-
     }
 }
 
@@ -152,15 +149,15 @@ void subMenu8bit(void)
         switch (menuChoice)
         {
         case 1:
-            //Encoding Binary From File
+            // Encoding Binary From File
             printf("You chose Encoding From File\n");
-            //std::cout << "Enter filename: ";
-            //std::getline(std::cin >> std::ws, inputString);
+            // std::cout << "Enter filename: ";
+            // std::getline(std::cin >> std::ws, inputString);
             my8BitBinaryEncoding();
             exitBinaryMenu = true;
             break;
         case 2:
-            //Decoding Binary From File
+            // Decoding Binary From File
             printf("Enter the filename: ");
             std::getline(std::cin >> std::ws, inputString);
             std::cout << std::endl;
@@ -168,7 +165,7 @@ void subMenu8bit(void)
             exitBinaryMenu = true;
             break;
         case 3:
-            //Encoding Binary From String
+            // Encoding Binary From String
             std::cout << "Enter the string: ";
             std::getline(std::cin >> std::ws, inputString);
             std::cout << std::endl;
@@ -180,11 +177,11 @@ void subMenu8bit(void)
             break;
         default:
             printf("The option %d does not exist\n"
-                   "Redirecting to main menu\n", menuChoice);
+                   "Redirecting to main menu\n",
+                   menuChoice);
             exitBinaryMenu = true;
             break;
         }
-
     }
 }
 
@@ -193,7 +190,7 @@ void subMenuCeasar()
     std::string inputData;
     short unsigned int shiftKeyValue;
     bool exitCeasarMenu = false;
-    while ( exitCeasarMenu == false )
+    while (exitCeasarMenu == false)
     {
         short unsigned int menuChoice;
 
@@ -218,7 +215,7 @@ void subMenuCeasar()
             std::getline(std::cin >> std::ws, inputData);
             printf("\nEnter the numeric shifting chipher wissed to use: ");
             std::cin >> shiftKeyValue;
-            caesarEncoding(shiftKeyValue, Tools::readFile(inputData));
+            caesarEncoding(shiftKeyValue, Tanja84dk::Tools::readFile(inputData));
             break;
         case 2:
             break;
@@ -236,7 +233,7 @@ void subMenuCeasar()
             printf("\nEnter the numeric shifting chipher key: ");
             std::cin >> shiftKeyValue;
             ceasarDecoding(shiftKeyValue, inputData);
-            exitCeasarMenu= true;
+            exitCeasarMenu = true;
             break;
         case 9:
             printf("Enter the string to bruteforce: ");
@@ -244,7 +241,7 @@ void subMenuCeasar()
             ceasarDecodingBruteforce(inputData);
             break;
         case 0:
-        exitCeasarMenu = true;
+            exitCeasarMenu = true;
             break;
         default:
             exitCeasarMenu = true;
@@ -288,13 +285,13 @@ void mainMenu(void)
         case 3:
             subMenu8bit();
             break;
-        case  4:
+        case 4:
             subMenuCeasar();
             break;
         case 6:
             printf("Enter The Filename: ");
             std::getline(std::cin >> std::ws, inputFile);
-            Tools::printFile(inputFile);
+            Tanja84dk::Tools::printFile(inputFile);
             break;
         case 9:
             ceasarDecoding(4, "Xlmw aew e xvmyqtl!");
@@ -305,10 +302,9 @@ void mainMenu(void)
             break;
         }
     }
-
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     printf("This is Version %d.%d-dev\n", ArgTools_VERSION_MAJOR, ArgTools_VERSION_MINOR);
     mainMenu();
