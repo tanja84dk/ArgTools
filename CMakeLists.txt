@@ -38,7 +38,7 @@ set(HeaderFiles
 # Add source to this project's executable.
 add_executable(${PROJECT_NAME} ${SourceFiles} ${HeaderFiles})
 
-target_link_libraries(${PROJECT_NAME} libs::Base64 Tanja84dk::Tools libs::Utf8)
+target_link_libraries(${PROJECT_NAME} rhymu8354::Base64 Tanja84dk::Tools rhymu8354::Utf8)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_BINARY_DIR})
 
