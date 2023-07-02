@@ -14,9 +14,9 @@ void my8BitBinaryEncoding(void)
     std::getline(std::cin >> std::ws, inputFilename);
     std::cout << std::endl;
 
-    outputFilename = Tanja84dk::Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Encoded.txt";
+    outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Encoded.txt";
 
-    if (Tanja84dk::Tools::doesFileExist(inputFilename))
+    if (Tanja84dk::tools::file_exists(inputFilename))
     {
         std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
         inputFileHandler.seekg(0, std::ios::end);
@@ -42,9 +42,9 @@ void my8BitBinaryEncoding(void)
         std::cout << std::endl;
     }
 
-    if (!Tanja84dk::Tools::doesFileExist(outputFilename))
+    if (!Tanja84dk::tools::file_exists(outputFilename))
     {
-        Tanja84dk::Tools::writeFile(binaryOutputVector, outputFilename);
+        Tanja84dk::tools::write_file(binaryOutputVector, outputFilename);
         printf("The output is written to a file called %s in the folder you have the program in\n\n", outputFilename.c_str());
     }
 }
@@ -59,11 +59,11 @@ void my8BitBinaryEncoding(const std::string &data)
         binaryOutputVector.push_back(std::bitset<8>(data.c_str()[i]));
     }
 
-    outputFilename = Tanja84dk::Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-8Bit-Binary.txt";
+    outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-8Bit-Binary.txt";
 
-    if (!Tanja84dk::Tools::doesFileExist(outputFilename))
+    if (!Tanja84dk::tools::file_exists(outputFilename))
     {
-        Tanja84dk::Tools::writeFile(binaryOutputVector, outputFilename);
+        Tanja84dk::tools::write_file(binaryOutputVector, outputFilename);
         printf("The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str());
     }
 }
@@ -74,9 +74,9 @@ void my8BitBinaryDecodingString(const std::string &inputFilename)
     std::string outputFilename;
     std::string inputDataBuffer;
     std::string outputData;
-    outputFilename = Tanja84dk::Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Decoded.txt";
+    outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Decoded.txt";
 
-    if (Tanja84dk::Tools::doesFileExist(inputFilename) == true)
+    if (Tanja84dk::tools::file_exists(inputFilename) == true)
     {
         std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
         inputFileHandler.seekg(0, std::ios::end);
@@ -98,9 +98,9 @@ void my8BitBinaryDecodingString(const std::string &inputFilename)
         printf("\n%s\n", outputData.c_str());
     }
 
-    if (Tanja84dk::Tools::doesFileExist(outputFilename) == false)
+    if (Tanja84dk::tools::file_exists(outputFilename) == false)
     {
-        Tanja84dk::Tools::writeFile(outputData, outputFilename);
+        Tanja84dk::tools::write_file(outputData, outputFilename);
         printf("The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str());
     }
 }
