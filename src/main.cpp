@@ -215,7 +215,7 @@ void subMenuCeasar()
             std::getline(std::cin >> std::ws, inputData);
             printf("\nEnter the numeric shifting chipher wissed to use: ");
             std::cin >> shiftKeyValue;
-            caesarEncoding(shiftKeyValue, Tanja84dk::Tools::readFile(inputData));
+            caesarEncoding(shiftKeyValue, Tanja84dk::tools::read_file(inputData));
             break;
         case 2:
             break;
@@ -291,7 +291,7 @@ void mainMenu(void)
         case 6:
             printf("Enter The Filename: ");
             std::getline(std::cin >> std::ws, inputFile);
-            Tanja84dk::Tools::printFile(inputFile);
+            Tanja84dk::tools::print_file(inputFile);
             break;
         case 9:
             ceasarDecoding(4, "Xlmw aew e xvmyqtl!");
