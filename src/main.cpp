@@ -89,13 +89,13 @@ void sub_menu_base64(void)
         case 1:
             // Encoding Base64 From File
             printf("You chose Encoding From File\n");
-            myBase64Encoding();
+            chipher::base64::encoding();
             exit_flag_base64_bool = true;
             break;
         case 2:
             // Decoding Base64 From File
             printf("You chose Decoding From File\n");
-            myBase64Decoding();
+            chipher::base64::decoding();
             exit_flag_base64_bool = true;
             break;
         case 3:
@@ -103,7 +103,7 @@ void sub_menu_base64(void)
             printf("You chose Decoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, input_string);
-            myBase64Encoding(input_string);
+            chipher::base64::encoding(input_string);
             exit_flag_base64_bool = true;
             break;
         case 4:
@@ -111,7 +111,7 @@ void sub_menu_base64(void)
             printf("You chose Decoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, input_string);
-            myBase64Decoding(input_string);
+            chipher::base64::decoding(input_string);
             exit_flag_base64_bool = true;
             break;
         case 0:

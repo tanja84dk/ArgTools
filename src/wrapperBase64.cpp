@@ -1,6 +1,6 @@
 #include "wrapperBase64.h"
 
-void myBase64Decoding(void)
+void chipher::base64::decoding(void)
 {
     std::string inputFilename;
     std::string outputFilename;
@@ -27,7 +27,7 @@ void myBase64Decoding(void)
     };
 }
 
-void myBase64Decoding(const std::string &inputData)
+void chipher::base64::decoding(const std::string &inputData)
 {
     std::string outputData;
     std::string outputFilename;
@@ -43,7 +43,7 @@ void myBase64Decoding(const std::string &inputData)
     }
 }
 
-void myBase64DecodingString(void)
+void chipher::base64::decoding_string(void)
 {
     printf("Enter the string");
     std::string inputData;
@@ -63,7 +63,7 @@ void myBase64DecodingString(void)
     };
 };
 
-void myBase64Encoding(void)
+void chipher::base64::encoding(void)
 {
     std::string inputFilename;
     printf("Enter Filename: ");
@@ -83,7 +83,7 @@ void myBase64Encoding(void)
     }
 };
 
-void myBase64Encoding(const std::string &data)
+void chipher::base64::encoding(const std::string &data)
 {
     bool statusCode;
     std::string outputData;
