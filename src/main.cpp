@@ -215,7 +215,7 @@ void sub_menu_ceasar_chipher()
             std::getline(std::cin >> std::ws, input_string);
             printf("\nEnter the numeric shifting chipher wissed to use: ");
             std::cin >> shift_key_short_uint;
-            caesarEncoding(shift_key_short_uint, Tanja84dk::tools::read_file(input_string));
+            chipher::ceasar::encoding(shift_key_short_uint, Tanja84dk::tools::read_file(input_string));
             break;
         case 2:
             break;
@@ -224,7 +224,7 @@ void sub_menu_ceasar_chipher()
             std::getline(std::cin >> std::ws, input_string);
             printf("\nEnter the numeric shifting chipher wissed to use: ");
             std::cin >> shift_key_short_uint;
-            caesarEncoding(shift_key_short_uint, input_string);
+            chipher::ceasar::encoding(shift_key_short_uint, input_string);
             exit_flag_ceasar_chipher_bool = true;
             break;
         case 4:
@@ -232,13 +232,13 @@ void sub_menu_ceasar_chipher()
             std::getline(std::cin >> std::ws, input_string);
             printf("\nEnter the numeric shifting chipher key: ");
             std::cin >> shift_key_short_uint;
-            ceasarDecoding(shift_key_short_uint, input_string);
+            chipher::ceasar::decoding(shift_key_short_uint, input_string);
             exit_flag_ceasar_chipher_bool = true;
             break;
         case 9:
             printf("Enter the string to bruteforce: ");
             std::getline(std::cin >> std::ws, input_string);
-            ceasarDecodingBruteforce(input_string);
+            chipher::ceasar::decoding_brute_force(input_string);
             break;
         case 0:
             exit_flag_ceasar_chipher_bool = true;
@@ -294,7 +294,7 @@ void main_menu(void)
             Tanja84dk::tools::print_file(input_file_string);
             break;
         case 9:
-            ceasarDecoding(4, "Xlmw aew e xvmyqtl!");
+            chipher::ceasar::decoding(4, "Xlmw aew e xvmyqtl!");
             break;
         case 0:
             exit(0);

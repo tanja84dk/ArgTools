@@ -1,6 +1,6 @@
 #include "caesarChipher.h"
 
-void caesarEncoding(const int keyValue, const std::string &inputData)
+void chipher::ceasar::encoding(const int keyValue, const std::string &inputData)
 {
     std::string outputData;
     std::string outputFilename;
@@ -44,7 +44,7 @@ void caesarEncoding(const int keyValue, const std::string &inputData)
     }
 };
 
-void ceasarDecoding(const int keyValue, const std::string &inputData)
+void chipher::ceasar::decoding(const int keyValue, const std::string &inputData)
 {
     std::string outputData;
     std::string outputFilename;
@@ -88,7 +88,7 @@ void ceasarDecoding(const int keyValue, const std::string &inputData)
     }
 };
 
-void ceasarDecodingBruteforce(const std::string &inputData)
+void chipher::ceasar::decoding_brute_force(const std::string &inputData)
 {
 
     for (int keyValue = 1; keyValue < 27; keyValue++)
