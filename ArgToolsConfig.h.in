@@ -1,2 +1,3 @@
 #define ArgTools_VERSION_MAJOR @ArgTools_VERSION_MAJOR@
 #define ArgTools_VERSION_MINOR @ArgTools_VERSION_MINOR@
+#define ArgTools_VERSION_PATCH @ArgTools_VERSION_PATCH@

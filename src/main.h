@@ -8,7 +8,7 @@
 #include "wrapperBinary.h"
 #include <ArgToolsConfig.h>
 
-void subMenuBase32(void);
-void subMenuBase64(void);
-void subMenu8bit(void);
-void mainMenu(void);
+void sub_menu_base32(void);
+void sub_menu_base64(void);
+void sub_menu_8bit(void);
+void main_menu(void);
