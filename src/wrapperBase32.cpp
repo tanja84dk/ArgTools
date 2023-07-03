@@ -1,6 +1,6 @@
 #include "wrapperBase32.h"
 
-void myBase32Decoding(void)
+void chipher::base32::myBase32Decoding(void)
 {
     std::string inputFilename;
     std::string outputFilename;
@@ -28,7 +28,7 @@ void myBase32Decoding(void)
     };
 }
 
-void myBase32Decoding(const std::string &inputData)
+void chipher::base32::myBase32Decoding(const std::string &inputData)
 {
     std::string outputData;
     std::string outputFilename;
@@ -47,7 +47,7 @@ void myBase32Decoding(const std::string &inputData)
     }
 }
 
-void myBase32DecodingString(void)
+void chipher::base32::myBase32DecodingString(void)
 {
     printf("Enter the string");
     std::string inputData;
@@ -72,7 +72,7 @@ void myBase32DecodingString(void)
     };
 };
 
-void myBase32Encoding(void)
+void chipher::base32::myBase32Encoding(void)
 {
     std::string inputFilename;
     printf("Enter Filename: ");
@@ -99,7 +99,7 @@ void myBase32Encoding(void)
     }
 };
 
-void myBase32Encoding(const std::string &data)
+void chipher::base32::myBase32Encoding(const std::string &data)
 {
     bool statusCode;
     std::string outputData;

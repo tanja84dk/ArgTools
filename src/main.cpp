@@ -26,13 +26,13 @@ void sub_menu_base32(void)
         case 1:
             // Encoding Base64 From File
             printf("You chose Encoding From File\n");
-            myBase32Encoding();
+            chipher::base32::myBase32Encoding();
             exit_flag_base32_bool = true;
             break;
         case 2:
             // Decoding Base64 From File
             printf("You chose Decoding From File\n");
-            myBase32Decoding();
+            chipher::base32::myBase32Decoding();
             exit_flag_base32_bool = true;
             break;
         case 3:
@@ -40,7 +40,7 @@ void sub_menu_base32(void)
             printf("You chose Decoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, input_string);
-            myBase32Encoding(input_string);
+            chipher::base32::myBase32Encoding(input_string);
             exit_flag_base32_bool = true;
             break;
         case 4:
@@ -48,7 +48,7 @@ void sub_menu_base32(void)
             printf("You chose Decoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, input_string);
-            myBase32Decoding(input_string);
+            chipher::base32::myBase32Decoding(input_string);
             exit_flag_base32_bool = true;
             break;
         case 0:
