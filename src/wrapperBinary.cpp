@@ -1,6 +1,6 @@
 #include "wrapperBinary.h"
 
-void my8BitBinaryEncoding(void)
+void chipher::binary::encoding(void)
 {
 
     std::string inputFilename;
@@ -49,7 +49,7 @@ void my8BitBinaryEncoding(void)
     }
 }
 
-void my8BitBinaryEncoding(const std::string &data)
+void chipher::binary::encoding(const std::string &data)
 {
     std::vector<std::bitset<8>> binaryOutputVector;
     std::string outputFilename;
@@ -68,7 +68,7 @@ void my8BitBinaryEncoding(const std::string &data)
     }
 }
 
-void my8BitBinaryDecodingString(const std::string &inputFilename)
+void chipher::binary::decoding_string(const std::string &inputFilename)
 {
 
     std::string outputFilename;

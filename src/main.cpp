@@ -153,7 +153,7 @@ void sub_menu_8bit(void)
             printf("You chose Encoding From File\n");
             // std::cout << "Enter filename: ";
             // std::getline(std::cin >> std::ws, inputString);
-            my8BitBinaryEncoding();
+            chipher::binary::encoding();
             exit_flag_8bit_bool = true;
             break;
         case 2:
@@ -161,7 +161,7 @@ void sub_menu_8bit(void)
             printf("Enter the filename: ");
             std::getline(std::cin >> std::ws, input_string);
             std::cout << std::endl;
-            my8BitBinaryDecodingString(input_string);
+            chipher::binary::decoding_string(input_string);
             exit_flag_8bit_bool = true;
             break;
         case 3:
@@ -169,7 +169,7 @@ void sub_menu_8bit(void)
             std::cout << "Enter the string: ";
             std::getline(std::cin >> std::ws, input_string);
             std::cout << std::endl;
-            my8BitBinaryEncoding(input_string);
+            chipher::binary::encoding(input_string);
             exit_flag_8bit_bool = true;
             break;
         case 0:
