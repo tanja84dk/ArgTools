@@ -5,9 +5,9 @@
 namespace chipher::ceasar
 {
 
-    void encoding(const int keyValue, const std::string &inputData);
-    void decoding(const int keyValue, const std::string &inputData);
+    void encoding(const int chipher_shift_key, const std::string &input_data);
+    void decoding(const int chipher_shift_key, const std::string &input_data);
 
-    void decoding_brute_force(const std::string &data);
+    void decoding_brute_force(const std::string &input_data);
 
 }

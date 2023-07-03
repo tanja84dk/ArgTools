@@ -1,134 +1,134 @@
 #include "caesarChipher.h"
 
-void chipher::ceasar::encoding(const int keyValue, const std::string &inputData)
+void chipher::ceasar::encoding(const int chipher_shift_key, const std::string &input_data)
 {
-    std::string outputData;
-    std::string outputFilename;
+    std::string output_data_string;
+    std::string output_filename_string;
 
-    char charBuffer;
-    for (int i = 0; i != inputData.length(); i++)
+    char buffer_char;
+    for (int i = 0; i != input_data.length(); i++)
     {
-        charBuffer = inputData[i];
-        if (charBuffer >= 'a' && charBuffer <= 'z')
+        buffer_char = input_data[i];
+        if (buffer_char >= 'a' && buffer_char <= 'z')
         {
-            charBuffer = charBuffer + keyValue;
-            if (charBuffer > 'z')
+            buffer_char = buffer_char + chipher_shift_key;
+            if (buffer_char > 'z')
             {
-                charBuffer = charBuffer - 'z' + 'a' - 1;
+                buffer_char = buffer_char - 'z' + 'a' - 1;
             }
-            outputData += charBuffer;
+            output_data_string += buffer_char;
         }
-        else if (charBuffer >= 'A' && charBuffer <= 'Z')
+        else if (buffer_char >= 'A' && buffer_char <= 'Z')
         {
-            charBuffer = charBuffer + keyValue;
-            if (charBuffer > 'Z')
+            buffer_char = buffer_char + chipher_shift_key;
+            if (buffer_char > 'Z')
             {
-                charBuffer = charBuffer - 'Z' + 'a' - 1;
+                buffer_char = buffer_char - 'Z' + 'a' - 1;
             }
-            outputData += charBuffer;
+            output_data_string += buffer_char;
         }
         else
         {
-            outputData += charBuffer;
+            output_data_string += buffer_char;
         }
     }
 
-    std::cout << outputData << std::endl;
+    std::cout << output_data_string << std::endl;
 
-    outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-CeasarChipher.txt";
+    output_filename_string = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-CeasarChipher.txt";
 
-    if (Tanja84dk::tools::file_exists(outputFilename) == false)
+    if (Tanja84dk::tools::file_exists(output_filename_string) == false)
     {
-        Tanja84dk::tools::write_file(outputData, outputFilename);
-        printf("The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str());
+        Tanja84dk::tools::write_file(output_data_string, output_filename_string);
+        printf("The output is also written to a file called %s in the folder you have the program in\n", output_filename_string.c_str());
     }
 };
 
-void chipher::ceasar::decoding(const int keyValue, const std::string &inputData)
+void chipher::ceasar::decoding(const int chipher_shift_key, const std::string &input_data)
 {
-    std::string outputData;
-    std::string outputFilename;
+    std::string output_data_string;
+    std::string output_filename_string;
 
-    char charBuffer;
-    for (int i = 0; i != inputData.length(); i++)
+    char buffer_char;
+    for (int i = 0; i != input_data.length(); i++)
     {
-        charBuffer = inputData[i];
-        if (charBuffer >= 'a' && charBuffer <= 'z')
+        buffer_char = input_data[i];
+        if (buffer_char >= 'a' && buffer_char <= 'z')
         {
-            charBuffer = charBuffer - keyValue;
-            if (charBuffer < 'a')
+            buffer_char = buffer_char - chipher_shift_key;
+            if (buffer_char < 'a')
             {
-                charBuffer = charBuffer + 'z' - 'a' + 1;
+                buffer_char = buffer_char + 'z' - 'a' + 1;
             }
-            outputData += charBuffer;
+            output_data_string += buffer_char;
         }
-        else if (charBuffer >= 'A' && charBuffer <= 'Z')
+        else if (buffer_char >= 'A' && buffer_char <= 'Z')
         {
-            charBuffer = charBuffer - keyValue;
-            if (charBuffer < 'A')
+            buffer_char = buffer_char - chipher_shift_key;
+            if (buffer_char < 'A')
             {
-                charBuffer = charBuffer + 'Z' - 'A' + 1;
+                buffer_char = buffer_char + 'Z' - 'A' + 1;
             }
-            outputData += charBuffer;
+            output_data_string += buffer_char;
         }
         else
         {
-            outputData += charBuffer;
+            output_data_string += buffer_char;
         }
     }
 
-    std::cout << outputData << std::endl;
+    std::cout << output_data_string << std::endl;
 
-    outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Decoded-CeasarChipher.txt";
+    output_filename_string = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Decoded-CeasarChipher.txt";
 
-    if (Tanja84dk::tools::file_exists(outputFilename) == false)
+    if (Tanja84dk::tools::file_exists(output_filename_string) == false)
     {
-        Tanja84dk::tools::write_file(outputData, outputFilename);
-        printf("The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str());
+        Tanja84dk::tools::write_file(output_data_string, output_filename_string);
+        printf("The output is also written to a file called %s in the folder you have the program in\n", output_filename_string.c_str());
     }
 };
 
-void chipher::ceasar::decoding_brute_force(const std::string &inputData)
+void chipher::ceasar::decoding_brute_force(const std::string &input_data)
 {
 
-    for (int keyValue = 1; keyValue < 27; keyValue++)
+    for (int chipher_shift_key_int = 1; chipher_shift_key_int < 27; chipher_shift_key_int++)
     {
 
-        short unsigned int spaceCounter = 0;
-        std::string outputData;
-        char charBuffer;
-        for (int i = 0; i != inputData.length() && spaceCounter != 3; i++)
+        short unsigned int count_of_spaces_uint = 0;
+        std::string output_data_string;
+        char buffer_char;
+        for (int i = 0; i != input_data.length() && count_of_spaces_uint != 3; i++)
         {
-            charBuffer = inputData[i];
-            if (charBuffer >= 'a' && charBuffer <= 'z')
+            buffer_char = input_data[i];
+            if (buffer_char >= 'a' && buffer_char <= 'z')
             {
-                charBuffer = charBuffer - keyValue;
-                if (charBuffer < 'a')
+                buffer_char = buffer_char - chipher_shift_key_int;
+                if (buffer_char < 'a')
                 {
-                    charBuffer = charBuffer + 'z' - 'a' + 1;
+                    buffer_char = buffer_char + 'z' - 'a' + 1;
                 }
-                outputData += charBuffer;
+                output_data_string += buffer_char;
             }
-            else if (charBuffer >= 'A' && charBuffer <= 'Z')
+            else if (buffer_char >= 'A' && buffer_char <= 'Z')
             {
-                charBuffer = charBuffer - keyValue;
-                if (charBuffer < 'A')
+                buffer_char = buffer_char - chipher_shift_key_int;
+                if (buffer_char < 'A')
                 {
-                    charBuffer = charBuffer + 'Z' - 'A' + 1;
+                    buffer_char = buffer_char + 'Z' - 'A' + 1;
                 }
-                outputData += charBuffer;
+                output_data_string += buffer_char;
             }
             else
             {
-                if (charBuffer == ' ')
+                if (buffer_char == ' ')
                 {
-                    spaceCounter++;
-                    if (spaceCounter == 3)
+                    count_of_spaces_uint++;
+                    if (count_of_spaces_uint == 3)
                     {
-                        std::cout << "Key Value " << keyValue << " and the data is: " << outputData << std::endl;
+                        std::cout << "Key Value " << chipher_shift_key_int << " and the data is: " << output_data_string << std::endl;
                     }
                 }
-                outputData += charBuffer;
+                output_data_string += buffer_char;
             }
         }
     }
