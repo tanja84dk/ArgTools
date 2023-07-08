@@ -24,8 +24,6 @@ configure_file(${PROJECT_NAME}Config.h.in include/${PROJECT_NAME}Config.h)
 set(SourceFiles
     "src/main.cpp"
     "src/caesarChipher.cpp"
-    "src/wrapperBase32.cpp"
-    "src/wrapperBase64.cpp"
     "src/wrapperBinary.cpp")
 
 set(HeaderFiles
@@ -33,8 +31,6 @@ set(HeaderFiles
     "src/pxx.h"
     "src/licenses.h"
     "src/caesarChipher.h"
-    "src/wrapperBase32.h"
-    "src/wrapperBase64.h"
     "src/wrapperBinary.h")
 
 # Add source to this project's executable.
@@ -42,7 +38,10 @@ add_executable(${PROJECT_NAME} ${SourceFiles})
 
 target_link_libraries(${PROJECT_NAME} Tanja84dk::tools Tanja84dk::crypt)
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_BINARY_DIR}/include)
+target_include_directories(${PROJECT_NAME}
+    PRIVATE
+        ${PROJECT_BINARY_DIR}/include
+        ${tanja84dk_crypt_BINARY_DIR}/include)
 
 if(DEFINED ENABLE_TEST)
     enable_testing()
