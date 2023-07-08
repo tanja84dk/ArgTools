@@ -5,11 +5,12 @@
 #include <utility>
 
 #include <Tanja84dk/tools/tools.h>
-#include <Tanja84dk/crypt/crypt.h>
+#include <Tanja84dk/crypt/base32/base32.h>
+#include <Tanja84dk/crypt/base64/base64.h>
+#include <Tanja84dk/crypt/binary/binary.h>
 
 #include <ArgToolsConfig.h>
 #include "caesarChipher.h"
-#include "wrapperBinary.h"
 #include "licenses.h"
 
 void sub_menu_base32(void)
@@ -166,6 +167,11 @@ void sub_menu_base64(void)
 void sub_menu_8bit(void)
 {
     std::string input_string;
+    std::string output_string;
+    std::vector<std::bitset<8>> input_vector;
+    std::vector<std::bitset<8>> output_vector;
+    std::string input_filename_string;
+    std::string output_filename_string;
     bool exit_flag_8bit_bool = false;
     while (exit_flag_8bit_bool == false)
     {
@@ -188,17 +194,37 @@ void sub_menu_8bit(void)
         case 1:
             // Encoding Binary From File
             printf("You chose Encoding From File\n");
-            // std::cout << "Enter filename: ";
-            // std::getline(std::cin >> std::ws, inputString);
-            chipher::binary::encoding();
+            std::cout << "Enter the filename: ";
+            input_filename_string.clear();
+            std::getline(std::cin >> std::ws, input_filename_string);
+            if (Tanja84dk::tools::file_exists(input_filename_string))
+            {
+                output_filename_string = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" + Tanja84dk::tools::remove_extention(input_filename_string) + "-Binary-Encoded.txt";
+                output_vector.clear();
+                output_vector = Tanja84dk::crypt::binary::encode(Tanja84dk::tools::read_file(input_filename_string));
+                if (Tanja84dk::tools::file_exists(output_filename_string) == false)
+                {
+                    Tanja84dk::tools::write_file(output_vector, output_filename_string);
+                }
+            }
+            input_filename_string.clear();
+            output_filename_string.clear();
             exit_flag_8bit_bool = true;
             break;
         case 2:
             // Decoding Binary From File
-            printf("Enter the filename: ");
-            std::getline(std::cin >> std::ws, input_string);
-            std::cout << std::endl;
-            chipher::binary::decoding_string(input_string);
+            std::cout << "Enter the filename: ";
+            std::getline(std::cin >> std::ws, input_filename_string);
+            if (Tanja84dk::tools::file_exists(input_filename_string))
+            {
+                output_filename_string = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" + Tanja84dk::tools::remove_extention(input_filename_string) + "-Binary-Decoded.txt";
+                std::string output_data_string = {};
+                output_data_string = Tanja84dk::crypt::binary::decode(Tanja84dk::tools::read_file(input_filename_string));
+                if (Tanja84dk::tools::file_exists(output_filename_string) == false)
+                {
+                    Tanja84dk::tools::write_file(output_data_string, output_filename_string);
+                }
+            }
             exit_flag_8bit_bool = true;
             break;
         case 3:
@@ -206,7 +232,15 @@ void sub_menu_8bit(void)
             std::cout << "Enter the string: ";
             std::getline(std::cin >> std::ws, input_string);
             std::cout << std::endl;
-            chipher::binary::encoding(input_string);
+
+            output_filename_string = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Binary-Eecoded.txt";
+            output_vector.clear();
+            output_vector = Tanja84dk::crypt::binary::encode(input_string);
+            if (Tanja84dk::tools::file_exists(output_filename_string) == false)
+            {
+                Tanja84dk::tools::write_file(output_vector, output_filename_string);
+            }
+
             exit_flag_8bit_bool = true;
             break;
         case 0:
