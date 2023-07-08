@@ -15,8 +15,10 @@ include(cmake/Tanja84dkWarnings.cmake)
 
 find_package(CPM REQUIRED)
 find_package(Tanja84dkTools REQUIRED)
-find_package(Cpp-rhymu8354-Base64 REQUIRED)
-find_package(Cpp-rhymu8354-Utf8 REQUIRED)
+find_package(tanja84dk_crypt REQUIRED)
+
+include(cmake/get_licenses.cmake)
+configure_file(${PROJECT_NAME}_licenses_macro.h.in ${PROJECT_NAME}_licenses_macro.h)
 
 configure_file(${PROJECT_NAME}Config.h.in ${PROJECT_NAME}Config.h)
 
@@ -30,6 +32,7 @@ set(SourceFiles
 set(HeaderFiles
     "src/main.h"
     "src/pxx.h"
+    "src/licenses.h"
     "src/caesarChipher.h"
     "src/wrapperBase32.h"
     "src/wrapperBase64.h"
@@ -38,7 +41,7 @@ set(HeaderFiles
 # Add source to this project's executable.
 add_executable(${PROJECT_NAME} ${SourceFiles})
 
-target_link_libraries(${PROJECT_NAME} rhymu8354::Base64 Tanja84dk::tools rhymu8354::Utf8)
+target_link_libraries(${PROJECT_NAME} Tanja84dk::tools Tanja84dk::crypt)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_BINARY_DIR})
 
