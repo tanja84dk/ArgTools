@@ -4,6 +4,12 @@
 #include <list>
 #include <utility>
 
+#include <Tanja84dk/tools/tools.h>
+#include <Tanja84dk/crypt/crypt.h>
+
+#include <ArgToolsConfig.h>
+#include "caesarChipher.h"
+#include "wrapperBinary.h"
 #include "licenses.h"
 
 void sub_menu_base32(void)
