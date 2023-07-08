@@ -18,9 +18,8 @@ find_package(Tanja84dkTools REQUIRED)
 find_package(tanja84dk_crypt REQUIRED)
 
 include(cmake/get_licenses.cmake)
-configure_file(${PROJECT_NAME}_licenses_macro.h.in ${PROJECT_NAME}_licenses_macro.h)
 
-configure_file(${PROJECT_NAME}Config.h.in ${PROJECT_NAME}Config.h)
+configure_file(${PROJECT_NAME}Config.h.in include/${PROJECT_NAME}Config.h)
 
 set(SourceFiles
     "src/main.cpp"
@@ -43,7 +42,7 @@ add_executable(${PROJECT_NAME} ${SourceFiles})
 
 target_link_libraries(${PROJECT_NAME} Tanja84dk::tools Tanja84dk::crypt)
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_BINARY_DIR})
+target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_BINARY_DIR}/include)
 
 if(DEFINED ENABLE_TEST)
     enable_testing()
