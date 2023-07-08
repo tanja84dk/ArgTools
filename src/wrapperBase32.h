@@ -1,15 +1,16 @@
 #pragma once
 #include "pxx.h"
 #include <Tanja84dk/tools/tools.h>
-#include <Base64/Base32.hpp>
+#include <base32.h>
 
-namespace chipher::base32
+namespace Tanja84dk::crypt::base32
 {
+    std::string decode(const std::string &input_data) noexcept;
+    std::string encode(const std::string &input_data) noexcept;
+}
 
-    void myBase32Encoding(void);
-    void myBase32Encoding(const std::string &data);
-    void myBase32Decoding(void);
-    void myBase32Decoding(const std::string &data);
-    void myBase32DecodingString(void);
-
+namespace Tanja84dk::crypt::base32hex
+{
+    std::string decode(const std::string &input_data) noexcept;
+    std::string encode(const std::string &input_data) noexcept;
 }

@@ -1,5 +1,11 @@
 #include "main.h"
 
+#include <string>
+#include <list>
+#include <utility>
+
+#include "licenses.h"
+
 void sub_menu_base32(void)
 {
     std::string input_string;
@@ -26,21 +32,22 @@ void sub_menu_base32(void)
         case 1:
             // Encoding Base64 From File
             printf("You chose Encoding From File\n");
-            chipher::base32::myBase32Encoding();
+            // chipher::base32::myBase32Encoding();
             exit_flag_base32_bool = true;
             break;
         case 2:
             // Decoding Base64 From File
             printf("You chose Decoding From File\n");
-            chipher::base32::myBase32Decoding();
+            // chipher::base32::myBase32Decoding();
             exit_flag_base32_bool = true;
             break;
         case 3:
             // Encoding Base64 From String
-            printf("You chose Decoding from string\n");
+            printf("You chose Encoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, input_string);
-            chipher::base32::myBase32Encoding(input_string);
+            std::cout << Tanja84dk::crypt::base32::encode(input_string) << '\n'
+                      << '\n';
             exit_flag_base32_bool = true;
             break;
         case 4:
@@ -48,7 +55,8 @@ void sub_menu_base32(void)
             printf("You chose Decoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, input_string);
-            chipher::base32::myBase32Decoding(input_string);
+            std::cout << Tanja84dk::crypt::base32::decode(input_string) << '\n'
+                      << '\n';
             exit_flag_base32_bool = true;
             break;
         case 0:
@@ -66,6 +74,9 @@ void sub_menu_base32(void)
 void sub_menu_base64(void)
 {
     std::string input_string;
+    std::string filename = {};
+    std::string input_data = {};
+    std::string output_data = {};
     bool exit_flag_base64_bool = false;
     while (exit_flag_base64_bool == false)
     {
@@ -88,14 +99,31 @@ void sub_menu_base64(void)
         {
         case 1:
             // Encoding Base64 From File
-            printf("You chose Encoding From File\n");
-            chipher::base64::encoding();
+            printf("You chose Encoding From File\nEnter filename: ");
+            std::getline(std::cin >> std::ws, filename);
+            if (Tanja84dk::tools::file_exists(filename))
+            {
+
+                input_data = Tanja84dk::tools::read_file(filename);
+                output_data = Tanja84dk::crypt::base64::encode(input_data);
+                std::cout << output_data << '\n'
+                          << '\n';
+            }
+
             exit_flag_base64_bool = true;
             break;
         case 2:
             // Decoding Base64 From File
             printf("You chose Decoding From File\n");
-            chipher::base64::decoding();
+            std::getline(std::cin >> std::ws, filename);
+            if (Tanja84dk::tools::file_exists(filename))
+            {
+                input_data = Tanja84dk::tools::read_file(filename);
+                output_data = Tanja84dk::crypt::base64::decode(input_data);
+                std::cout << output_data << '\n'
+                          << '\n';
+            }
+
             exit_flag_base64_bool = true;
             break;
         case 3:
@@ -103,7 +131,8 @@ void sub_menu_base64(void)
             printf("You chose Decoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, input_string);
-            chipher::base64::encoding(input_string);
+            std::cout << Tanja84dk::crypt::base64::encode(input_string) << '\n'
+                      << '\n';
             exit_flag_base64_bool = true;
             break;
         case 4:
@@ -111,7 +140,9 @@ void sub_menu_base64(void)
             printf("You chose Decoding from string\n");
             printf("Enter the string: ");
             std::getline(std::cin >> std::ws, input_string);
-            chipher::base64::decoding(input_string);
+            std::cout << Tanja84dk::crypt::base64::decode(input_string) << '\n'
+                      << '\n';
+            // chipher::base64::decoding(input_string);
             exit_flag_base64_bool = true;
             break;
         case 0:
@@ -250,6 +281,43 @@ void sub_menu_ceasar_chipher()
     }
 }
 
+void sub_menu_about() noexcept
+{
+    bool exit_flag_about_bool = false;
+    while (exit_flag_about_bool == false)
+    {
+        short unsigned int sub_menu_about_choice;
+
+        printf("----------------------------\n"
+               "      About\n"
+               "----------------------------\n"
+               "[ ] About Project\n"
+               "[2] All Licenses\n"
+               "[0] Back To Main Menu\n"
+               "----------------------------\n"
+               "Enter your choice: ");
+        std::cin >> sub_menu_about_choice;
+        std::cout << std::endl;
+
+        switch (sub_menu_about_choice)
+        {
+        case 1:
+            exit_flag_about_bool = true;
+            break;
+        case 2:
+            Tanja84dk::argtools::license::print_all_licenses();
+            exit_flag_about_bool = true;
+            break;
+        case 0:
+            exit_flag_about_bool = true;
+            break;
+        default:
+            exit_flag_about_bool = true;
+            break;
+        }
+    }
+}
+
 void main_menu(void)
 {
     std::string input_file_string;
@@ -264,6 +332,7 @@ void main_menu(void)
                "[3] 8Bit Binary\n"
                "[4] Ceasar Chipher\n"
                "[6] Test Print File\n"
+               "[9] About\n"
                "[0] Exit\n"
                "----------------------------\n"
                "This is Version %d.%d.%d-dev\n"
@@ -294,7 +363,7 @@ void main_menu(void)
             Tanja84dk::tools::print_file(input_file_string);
             break;
         case 9:
-            chipher::ceasar::decoding(4, "Xlmw aew e xvmyqtl!");
+            sub_menu_about();
             break;
         case 0:
             exit(0);

@@ -1,122 +1,73 @@
 #include "wrapperBase32.h"
 
-void chipher::base32::myBase32Decoding(void)
+#include <string>
+#include <base32.h>
+
+
+std::string Tanja84dk::crypt::base32::decode(const std::string &input_data) noexcept
 {
-    std::string inputFilename;
-    std::string outputFilename;
-    std::string outputData;
+    CryptoPP::Base32Decoder Decoder;
+    std::string decoded_string;
+    Decoder.Put((CryptoPP::byte *)input_data.data(), input_data.size());
+    Decoder.MessageEnd();
 
-    printf("Enter the filename: ");
-    std::getline(std::cin >> std::ws, inputFilename);
-    std::cout << std::endl;
+    CryptoPP::word64 size_word64 = Decoder.MaxRetrievable();
 
-    if (Tanja84dk::tools::file_exists(inputFilename))
+    if (size_word64 && size_word64 <= SIZE_MAX)
     {
-        outputData = Base32::Decode(Tanja84dk::tools::read_file(inputFilename));
-
-        // Could not get printf to work with the Base64 decoding, guess its a incoding issue.
-        // Falling back to cout until issue is located
-        std::cout << outputData << std::endl;
-
-        outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Decoded-Base32.txt";
-
-        if (!Tanja84dk::tools::file_exists(outputFilename))
-        {
-            Tanja84dk::tools::write_file(outputData, outputFilename);
-            printf("The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str());
-        };
-    };
+        decoded_string.resize(size_word64);
+        Decoder.Get((CryptoPP::byte *)&decoded_string[0], decoded_string.size());
+    }
+    return decoded_string;
 }
 
-void chipher::base32::myBase32Decoding(const std::string &inputData)
+std::string Tanja84dk::crypt::base32::encode(const std::string &input_data) noexcept
 {
-    std::string outputData;
-    std::string outputFilename;
-    outputData = Base32::Decode(inputData);
+    CryptoPP::Base32Encoder Encoder;
+    std::string encoded_string = {};
+    Encoder.Put((CryptoPP::byte *)input_data.data(), input_data.size());
+    Encoder.MessageEnd();
 
-    // Could not get printf to work with the Base64 decoding, guess its a incoding issue.
-    // Falling back to cout until issue is located
-    std::cout << outputData << std::endl;
-
-    outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Decoded-Base32.txt";
-
-    if (Tanja84dk::tools::file_exists(outputFilename) == false)
+    CryptoPP::word64 size_word64 = Encoder.MaxRetrievable();
+    if (size_word64)
     {
-        Tanja84dk::tools::write_file(outputData, outputFilename);
-        printf("The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str());
+        encoded_string.resize(size_word64);
+        Encoder.Get((CryptoPP::byte *)&encoded_string[0], encoded_string.size());
     }
+
+    return encoded_string;
 }
 
-void chipher::base32::myBase32DecodingString(void)
+std::string Tanja84dk::crypt::base32hex::decode(const std::string &input_data) noexcept
 {
-    printf("Enter the string");
-    std::string inputData;
-    std::getline(std::cin >> std::ws, inputData);
-    int outStatusCode;
-    std::string outputData;
-    std::string outputFilename;
+    CryptoPP::Base32HexDecoder Decoder;
+    std::string decoded_string;
+    Decoder.Put((CryptoPP::byte *)input_data.data(), input_data.size());
+    Decoder.MessageEnd();
 
-    outputData = Base32::Decode(inputData);
+    CryptoPP::word64 size_word64 = Decoder.MaxRetrievable();
 
-    // Could not get printf to work with the Base32 decoding, guess its a incoding issue.
-    // Falling back to cout until issue is located
-    std::cout << std::endl
-              << outputData << std::endl;
-
-    outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-From_String-Decoded-Base32.txt";
-
-    if (!Tanja84dk::tools::file_exists(outputFilename))
+    if (size_word64 && size_word64 <= SIZE_MAX)
     {
-        Tanja84dk::tools::write_file(outputData, outputFilename);
-        printf("The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str());
-    };
-};
-
-void chipher::base32::myBase32Encoding(void)
-{
-    std::string inputFilename;
-    printf("Enter Filename: ");
-    std::getline(std::cin >> std::ws, inputFilename);
-    std::string outputData;
-    std::string outputFilename;
-
-    if (Tanja84dk::tools::file_exists(inputFilename))
-    {
-        outputData = Base32::Encode(Tanja84dk::tools::read_file(inputFilename));
-
-        // Could not get printf to work with the Base32 decoding, guess its a incoding issue.
-        // Falling back to cout until issue is located
-        std::cout << std::endl
-                  << outputData << std::endl;
-
-        outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Encoded-Base32.txt";
-
-        if (!Tanja84dk::tools::file_exists(outputFilename))
-        {
-            Tanja84dk::tools::write_file(outputData, outputFilename);
-            printf("The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str());
-        }
+        decoded_string.resize(size_word64);
+        Decoder.Get((CryptoPP::byte *)&decoded_string[0], decoded_string.size());
     }
-};
+    return decoded_string;
+}
 
-void chipher::base32::myBase32Encoding(const std::string &data)
+std::string Tanja84dk::crypt::base32hex::encode(const std::string &input_data) noexcept
 {
-    bool statusCode;
-    std::string outputData;
-    std::string outputFilename;
+    CryptoPP::Base32HexEncoder Encoder;
+    std::string encoded_string = {};
+    Encoder.Put((CryptoPP::byte *)input_data.data(), input_data.size());
+    Encoder.MessageEnd();
 
-    outputData = Base32::Encode((data));
-
-    // Could not get printf to work with the Base32 decoding, guess its a incoding issue.
-    // Falling back to cout until issue is located
-    std::cout << std::endl
-              << outputData << std::endl;
-
-    outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-Base32.txt";
-
-    if (!Tanja84dk::tools::file_exists(outputFilename))
+    CryptoPP::word64 size_word64 = Encoder.MaxRetrievable();
+    if (size_word64)
     {
-        Tanja84dk::tools::write_file(outputData, outputFilename);
-        printf("The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str());
+        encoded_string.resize(size_word64);
+        Encoder.Get((CryptoPP::byte *)&encoded_string[0], encoded_string.size());
     }
+
+    return encoded_string;
 }
