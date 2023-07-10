@@ -4,11 +4,12 @@
 
 cmake_minimum_required (VERSION 3.16)
 
-project ("ArgTools" VERSION 0.3.0)
+project (ArgTools VERSION 0.3.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+option(ArgTools_BUILD_TESTING OFF)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(cmake/Tanja84dkWarnings.cmake)
@@ -43,7 +44,7 @@ target_include_directories(${PROJECT_NAME}
         ${PROJECT_BINARY_DIR}/include
         ${tanja84dk_crypt_BINARY_DIR}/include)
 
-if(DEFINED ENABLE_TEST)
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR OR ArgTools_BUILD_TESTING STREQUAL ON)
     enable_testing()
-    add_subdirectory(src/test)
-endif(DEFINED ENABLE_TEST)
+    add_subdirectory(test)
+endif()
