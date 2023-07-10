@@ -39,7 +39,7 @@ std::string get_tanja84dk_crypt_license() {
 }
 
 std::string get_tanja84dk_tools_license() {
-    std::string license = Tanja84dk_tools_LICENSE;
+    std::string license = tanja84dk_tools_LICENSE;
     replace_all(license, ";", "\n");
     return license;
 };
@@ -56,6 +56,12 @@ std::string get_cryptopp_license() {
     return license;
 };
 
+std::string get_fmtlib_license() {
+    std::string license = fmtlib_LICENSE;
+    replace_all(license, ";", "\n");
+    return license;
+};
+
 void print_all_licenses() {
     print_title_for_licenses("ArgTools");
     printf("%s\n\n", get_argtools_license().c_str());
@@ -65,6 +71,9 @@ void print_all_licenses() {
 
     print_title_for_licenses("tanja84dk_tools");
     printf("%s\n\n", get_tanja84dk_tools_license().c_str());
+
+    print_title_for_licenses("fmtlib");
+    printf("%s\n\n", get_fmtlib_license().c_str());
 
     print_title_for_licenses("cryptopp-cmake");
     printf("%s\n\n", get_cryptopp_cmake_license().c_str());
