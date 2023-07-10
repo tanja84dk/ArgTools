@@ -1,13 +1,15 @@
 #pragma once
-#include "pxx.h"
 #include <Tanja84dk/tools/tools.h>
 
-namespace chipher::ceasar
-{
+#include "pxx.h"
 
-    void encoding(const int chipher_shift_key, const std::string &input_data);
-    void decoding(const int chipher_shift_key, const std::string &input_data);
+namespace chipher {
+namespace ceasar {
 
-    void decoding_brute_force(const std::string &input_data);
+void encoding(const int chipher_shift_key, const std::string &input_data);
+void decoding(const int chipher_shift_key, const std::string &input_data);
 
-}
+void decoding_brute_force(const std::string &input_data);
+
+}  // namespace ceasar
+}  // namespace chipher
