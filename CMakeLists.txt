@@ -15,6 +15,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(cmake/Tanja84dkWarnings.cmake)
 
 find_package(CPM REQUIRED)
+find_package(fmtlib REQUIRED)
 find_package(tanja84dk_tools REQUIRED)
 find_package(tanja84dk_crypt REQUIRED)
 
@@ -37,7 +38,7 @@ set(HeaderFiles
 # Add source to this project's executable.
 add_executable(${PROJECT_NAME} ${SourceFiles})
 
-target_link_libraries(${PROJECT_NAME} Tanja84dk::tools Tanja84dk::crypt)
+target_link_libraries(${PROJECT_NAME} PRIVATE Tanja84dk::tools Tanja84dk::crypt fmt::fmt)
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE

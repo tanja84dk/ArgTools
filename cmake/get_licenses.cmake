@@ -26,7 +26,15 @@ else()
     message("Tanja84dk_tools_LICENSE is missing")
 endif()
 
-file(APPEND "${${PROJECT_NAME}_LICENSES_MACRO_FILE}"
-"\n#endif // TANJA84DK_ARGTOOLS_LICENCES_MACRO_H\n")
+if(EXISTS "${fmtlib_SOURCE_DIR}/LICENSE.rst")
+    file(STRINGS ${fmtlib_SOURCE_DIR}/LICENSE.rst fmtlib_LICENSE)
+    string(PREPEND fmtlib_LICENSE "R\"(")
+    string(APPEND fmtlib_LICENSE ")\"")
+    file(APPEND ${${PROJECT_NAME}_LICENSES_MACRO_FILE} "#define fmtlib_LICENSE @fmtlib_LICENSE@\n")
+else()
+    message("fmtlib_LICENSE is missing")
+endif()
+
+file(APPEND "${${PROJECT_NAME}_LICENSES_MACRO_FILE}" "\n#endif // TANJA84DK_ARGTOOLS_LICENCES_MACRO_H\n")
 
 configure_file(${${PROJECT_NAME}_LICENSES_MACRO_FILE} include/${PROJECT_NAME}_licenses_macro.h)

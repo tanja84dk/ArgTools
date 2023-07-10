@@ -10,23 +10,24 @@ At this time its able to encrypt and decrypt base32, base64 and 8Bit binary ( Ce
 
 > #### About The Tool
 >
-> - Because of the length of 8Bit Binary strings its then only posible to encode and decode from a .txt file.  
->     
+> - Because of the length of 8Bit Binary strings its then only posible to encode and decode from a .txt file.
 >   All output from encoding and decoding will be saved in seperate .txt files in the directory and they are prepended date and time stamp to not overwrite any of your results
 
 ## Compiling from source
- - git clone --recurse-submodules https://github.com/tanja84dk/ArgTools
- - Test compiled with VS Code and Clang12.0.1, GCC 7.5.0 and CMake 3.21.0 on Ubuntu 18.04.5 LTS
+
+- git clone --recurse-submodules https://github.com/tanja84dk/ArgTools
+- Test compiled with VS Code and Clang15.0.7, GCC 11.3.0 and CMake 3.21.0 on Debian 12 (Bookworm)
 
 ## Used External libraries
- - [**Base64**](https://github.com/rhymu8354/Base64) created by [***Richard Walters***](https://github.com/rhymu8354)
- - [**Utf8**](https://github.com/rhymu8354/Utf8) created by [***Richard Walters***](https://github.com/rhymu8354)
- - [***googletest***](https://github.com/google/googletest) created by [***Google***](https://github.com/google)
- - [***Cpp-Tanja84dk-Tools***](https://github.com/tanja84dk/Cpp-Tanaj84dk-Tools) created by [***tanja84dk***](https://github.com/tanja84dk)
+
+- [**_Cpp-Tanja84dk-Tools_**](https://github.com/tanja84dk/Cpp-Tanaj84dk-Tools) created by [**_tanja84dk_**](https://github.com/tanja84dk)
+- [**_Cpp-Tanja84dk-Crypt_**](https://github.com/tanja84dk/Cpp-Tanja84dk-Crypt) created by [**_tanja84dk_**](https://github.com/tanja84dk)
+- [**_fmtlib_**](https://github.com/fmtlib/fmt) created by [**_fmtlib_**](https://github.com/fmtlib)
 
 ## Used third-party tools
-- [**Clang**](https://clang.llvm.org) for compilation with code sanitizers
-- [**CMake**](https://cmake.org) for build automation
+
+- [**_Clang_**](https://clang.llvm.org) for compilation with code sanitizers
+- [**_CMake_**](https://cmake.org) for build automation
 
 ## License
 
@@ -34,8 +35,6 @@ See the 'LICENSE' for details. In summary ArgTools is licensed under the MIT Lic
 
 ## Additional Licenses
 
- - [**Base64**](https://github.com/rhymu8354/Base64) created by [***Richard Walters***](https://github.com/rhymu8354) is licended under [***MIT License***](https://github.com/rhymu8354/Base64/blob/main/LICENSE.txt)
- - [**Utf8**](https://github.com/rhymu8354/Utf8) created by [***Richard Walters***](https://github.com/rhymu8354) is licended under [***MIT License***](https://github.com/rhymu8354/Utf8/blob/main/LICENSE.txt)
- - [***googletest***](https://github.com/google/googletest) created by [***Google***](https://github.com/google) is licended under [***BSD 3-Clause "New" or "Revised" License***](https://github.com/google/googletest/blob/master/LICENSE)
- - [***Cpp-Tanja84dk-Tools***](https://github.com/tanja84dk/Cpp-Tanaj84dk-Tools) created by [***tanja84dk***](https://github.com/tanja84dk) is licended under [***MIT License***](https://github.com/tanja84dk/Cpp-Tanaj84dk-Tools/blob/master/LICENSE)
- 
+- [**_Cpp-Tanja84dk-Tools_**](https://github.com/tanja84dk/Cpp-Tanaj84dk-Tools) created by [**_tanja84dk_**](https://github.com/tanja84dk) is licended under [**_MIT License_**](https://github.com/tanja84dk/Cpp-Tanaj84dk-Tools/blob/master/LICENSE)
+- [**_Cpp-Tanja84dk-Crypt_**](https://github.com/tanja84dk/Cpp-Tanaj84dk-Tools) created by [**_tanja84dk_**](https://github.com/tanja84dk) is licended under [**_MIT License_**](https://github.com/tanja84dk/Cpp-Tanaj84dk-Crypt/blob/main/LICENSE)
+- [**_fmtlib_**](https://github.com/fmtlib/fmt) created by [**_fmtlib_**](https://github.com/fmtlib) in licensed under [**_MIT License_**](https://github.com/fmtlib/fmt/blob/10.0.0/LICENSE.rst)
