@@ -184,7 +184,7 @@ void sub_menu_base64(void) {
             case 0:
                 exit_flag_base64_bool = true;
             default:
-                std::cout << "The option " << sub_menu_base64 << " does not exist\nRedirecting to main menu\n\n";
+                std::cout << "The option " << sub_menu_base64_choice << " does not exist\nRedirecting to main menu\n\n";
                 exit_flag_base64_bool = true;
                 break;
         }
