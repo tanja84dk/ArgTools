@@ -15,7 +15,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(cmake/Tanja84dkWarnings.cmake)
 
 find_package(CPM REQUIRED)
-find_package(Tanja84dkTools REQUIRED)
+find_package(tanja84dk_tools REQUIRED)
 find_package(tanja84dk_crypt REQUIRED)
 
 include(cmake/get_licenses.cmake)
