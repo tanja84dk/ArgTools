@@ -5,5 +5,7 @@ TabWidth: 4
 Language: Cpp
 BasedOnStyle: Google
 ColumnLimit: 120
+AlignOperands: true
+AlwaysBreakTemplateDeclarations: true
 ---
 
