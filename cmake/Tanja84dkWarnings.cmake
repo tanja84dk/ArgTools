@@ -1,3 +1,5 @@
+include(CheckCXXCompilerFlag)
+
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   set(PEDANTIC_COMPILE_FLAGS -pedantic-errors -Wall -Wextra -pedantic
       -Wold-style-cast -Wundef
@@ -26,12 +28,11 @@ endif ()
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   set(PEDANTIC_COMPILE_FLAGS -Wall -Wextra -pedantic -Wconversion -Wundef
-      -Wdeprecated -Wweak-vtables -Wshadow
-      -Wno-gnu-zero-variadic-macro-arguments)
+    -Wdeprecated -Wweak-vtables -Wshadow
+    -Wno-gnu-zero-variadic-macro-arguments)
   check_cxx_compiler_flag(-Wzero-as-null-pointer-constant HAS_NULLPTR_WARNING)
   if (HAS_NULLPTR_WARNING)
-    set(PEDANTIC_COMPILE_FLAGS ${PEDANTIC_COMPILE_FLAGS}
-        -Wzero-as-null-pointer-constant)
+    set(PEDANTIC_COMPILE_FLAGS ${PEDANTIC_COMPILE_FLAGS} -Wzero-as-null-pointer-constant)
   endif ()
   set(WERROR_FLAG -Werror)
 endif ()
