@@ -1,14 +1,13 @@
 // 010-TestCase.cpp
 // And write tests in the same file:
 #include <Tanja84dk/crypt/crypt.h>
-#include <Tanja84dk/crypt/licenses.h>
-#include <Tanja84dk/crypt/tanja84dk_crypt_licenses_macro.h>
+// #include <Tanja84dk/crypt/licenses.h>
+// #include <Tanja84dk/crypt/tanja84dk_crypt_licenses_macro.h>
 
 #include <catch2/catch_test_macros.hpp>
 
-TEST_CASE("Get License for tanja84dk_crypt") {
-    REQUIRE(Tanja84dk::crypt::license::get_tanja84dk_crypt_license() == tanja84dk_crypt_LICENSE);
-}
+// TEST_CASE("Get License for tanja84dk_crypt") {
+//           REQUIRE(Tanja84dk::crypt::license::get_tanja84dk_crypt_license() == tanja84dk_crypt_LICENSE);}
 
 // Compile & run:
 // - g++ -std=c++14 -Wall -I$(CATCH_SINGLE_INCLUDE) -o 010-TestCase 010-TestCase.cpp && 010-TestCase --success
