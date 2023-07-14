@@ -53,7 +53,7 @@ void sub_menu_base32(void) {
                 Base32DataStore.clear();
                 std::cout << "You chose Encoding From File\nEnter filename: ";
                 std::getline(std::cin >> std::ws, Base32DataStore.input_filename_string);
-                if (Tanja84dk::tools::file_exists(Base32DataStore.input_filename_string)) {
+                if (Tanja84dk::tools::file_exist(Base32DataStore.input_filename_string)) {
                     Base32DataStore.input_data_string =
                         Tanja84dk::tools::read_file(Base32DataStore.input_filename_string);
                     Base32DataStore.output_data_string =
@@ -68,7 +68,7 @@ void sub_menu_base32(void) {
                 Base32DataStore.clear();
                 std::cout << "You chose Decoding From File\nEnter filename: ";
                 std::getline(std::cin >> std::ws, Base32DataStore.input_filename_string);
-                if (Tanja84dk::tools::file_exists(Base32DataStore.input_filename_string)) {
+                if (Tanja84dk::tools::file_exist(Base32DataStore.input_filename_string)) {
                     Base32DataStore.input_data_string =
                         Tanja84dk::tools::read_file(Base32DataStore.input_filename_string);
                     Base32DataStore.output_data_string =
@@ -135,7 +135,7 @@ void sub_menu_base64(void) {
                 Base64DataStore.clear();
                 std::cout << "You chose Encoding From File\nEnter filename: ";
                 std::getline(std::cin >> std::ws, Base64DataStore.input_filename_string);
-                if (Tanja84dk::tools::file_exists(Base64DataStore.input_filename_string)) {
+                if (Tanja84dk::tools::file_exist(Base64DataStore.input_filename_string)) {
                     Base64DataStore.input_data_string =
                         Tanja84dk::tools::read_file(Base64DataStore.input_filename_string);
                     Base64DataStore.output_data_string =
@@ -150,7 +150,7 @@ void sub_menu_base64(void) {
                 Base64DataStore.clear();
                 std::cout << "You chose Decoding From File\nEnter filename: ";
                 std::getline(std::cin >> std::ws, Base64DataStore.input_filename_string);
-                if (Tanja84dk::tools::file_exists(Base64DataStore.input_filename_string)) {
+                if (Tanja84dk::tools::file_exist(Base64DataStore.input_filename_string)) {
                     Base64DataStore.input_data_string =
                         Tanja84dk::tools::read_file(Base64DataStore.input_filename_string);
                     Base64DataStore.output_data_string =
@@ -220,14 +220,14 @@ void sub_menu_8bit(void) {
                 input_filename_string.clear();
                 std::cout << "You chose Encoding From File\nEnter the filename: ";
                 std::getline(std::cin >> std::ws, input_filename_string);
-                if (Tanja84dk::tools::file_exists(input_filename_string)) {
+                if (Tanja84dk::tools::file_exist(input_filename_string)) {
                     output_filename_string = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" +
                                              Tanja84dk::tools::remove_extention(input_filename_string) +
                                              "-Binary-Encoded.txt";
                     output_vector.clear();
                     output_vector =
                         Tanja84dk::crypt::binary::encode(Tanja84dk::tools::read_file(input_filename_string));
-                    if (Tanja84dk::tools::file_exists(output_filename_string) == false) {
+                    if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
                         Tanja84dk::tools::write_file(output_vector, output_filename_string);
                     }
                 }
@@ -239,14 +239,14 @@ void sub_menu_8bit(void) {
                 // Decoding Binary From File
                 std::cout << "Enter the filename: ";
                 std::getline(std::cin >> std::ws, input_filename_string);
-                if (Tanja84dk::tools::file_exists(input_filename_string)) {
+                if (Tanja84dk::tools::file_exist(input_filename_string)) {
                     output_filename_string = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" +
                                              Tanja84dk::tools::remove_extention(input_filename_string) +
                                              "-Binary-Decoded.txt";
                     std::string output_data_string = {};
                     output_data_string =
                         Tanja84dk::crypt::binary::decode(Tanja84dk::tools::read_file(input_filename_string));
-                    if (Tanja84dk::tools::file_exists(output_filename_string) == false) {
+                    if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
                         Tanja84dk::tools::write_file(output_data_string, output_filename_string);
                     }
                 }
@@ -262,7 +262,7 @@ void sub_menu_8bit(void) {
                     Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Binary-Eecoded.txt";
                 output_vector.clear();
                 output_vector = Tanja84dk::crypt::binary::encode(input_string);
-                if (Tanja84dk::tools::file_exists(output_filename_string) == false) {
+                if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
                     Tanja84dk::tools::write_file(output_vector, output_filename_string);
                 }
 
@@ -307,7 +307,7 @@ void sub_menu_ceasar_chipher() {
                 std::getline(std::cin >> std::ws, CeasarDataStore.input_filename_string);
                 std::cout << "\nEnter the numeric shifting chipher wissed to use: ";
                 std::cin >> shift_key_int;
-                if (Tanja84dk::tools::file_exists(CeasarDataStore.input_filename_string)) {
+                if (Tanja84dk::tools::file_exist(CeasarDataStore.input_filename_string)) {
                     CeasarDataStore.output_filename_string =
                         Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" +
                         Tanja84dk::tools::remove_extention(CeasarDataStore.input_filename_string) +
@@ -317,7 +317,7 @@ void sub_menu_ceasar_chipher() {
                     CeasarDataStore.output_data_string =
                         Tanja84dk::crypt::ceasar::encode(shift_key_int, CeasarDataStore.input_data_string);
 
-                    if (Tanja84dk::tools::file_exists(CeasarDataStore.output_filename_string) == false) {
+                    if (Tanja84dk::tools::file_exist(CeasarDataStore.output_filename_string) == false) {
                         Tanja84dk::tools::write_file(CeasarDataStore.output_data_string,
                                                      CeasarDataStore.output_filename_string);
                         std::cout << "The output is also written to a file called "
@@ -332,7 +332,7 @@ void sub_menu_ceasar_chipher() {
                 std::getline(std::cin >> std::ws, CeasarDataStore.input_filename_string);
                 std::cout << "\nEnter the numeric shifting chipher wissed to use: ";
                 std::cin >> shift_key_int;
-                if (Tanja84dk::tools::file_exists(CeasarDataStore.input_filename_string)) {
+                if (Tanja84dk::tools::file_exist(CeasarDataStore.input_filename_string)) {
                     CeasarDataStore.output_filename_string =
                         Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" +
                         Tanja84dk::tools::remove_extention(CeasarDataStore.input_filename_string) +
@@ -342,7 +342,7 @@ void sub_menu_ceasar_chipher() {
                     CeasarDataStore.output_data_string =
                         Tanja84dk::crypt::ceasar::decode(shift_key_int, CeasarDataStore.input_data_string);
 
-                    if (Tanja84dk::tools::file_exists(CeasarDataStore.output_filename_string) == false) {
+                    if (Tanja84dk::tools::file_exist(CeasarDataStore.output_filename_string) == false) {
                         Tanja84dk::tools::write_file(CeasarDataStore.output_data_string,
                                                      CeasarDataStore.output_filename_string);
                         std::cout << "The output is also written to a file called "
@@ -363,7 +363,7 @@ void sub_menu_ceasar_chipher() {
                 CeasarDataStore.output_data_string =
                     Tanja84dk::crypt::ceasar::encode(shift_key_int, CeasarDataStore.input_data_string);
 
-                if (Tanja84dk::tools::file_exists(CeasarDataStore.output_filename_string) == false) {
+                if (Tanja84dk::tools::file_exist(CeasarDataStore.output_filename_string) == false) {
                     Tanja84dk::tools::write_file(CeasarDataStore.output_data_string,
                                                  CeasarDataStore.output_filename_string);
                     std::cout << "The output is also written to a file called "
@@ -384,7 +384,7 @@ void sub_menu_ceasar_chipher() {
                 CeasarDataStore.output_data_string =
                     Tanja84dk::crypt::ceasar::decode(shift_key_int, CeasarDataStore.input_data_string);
 
-                if (Tanja84dk::tools::file_exists(CeasarDataStore.output_filename_string) == false) {
+                if (Tanja84dk::tools::file_exist(CeasarDataStore.output_filename_string) == false) {
                     Tanja84dk::tools::write_file(CeasarDataStore.output_data_string,
                                                  CeasarDataStore.output_filename_string);
                     std::cout << "The output is also written to a file called "

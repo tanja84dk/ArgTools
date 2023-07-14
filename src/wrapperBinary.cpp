@@ -14,7 +14,7 @@ void chipher::binary::encoding(void) {
 
     outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Encoded.txt";
 
-    if (Tanja84dk::tools::file_exists(inputFilename)) {
+    if (Tanja84dk::tools::file_exist(inputFilename)) {
         std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
         inputFileHandler.seekg(0, std::ios::end);
         inputDataBuffer.reserve(inputFileHandler.tellg());
@@ -35,7 +35,7 @@ void chipher::binary::encoding(void) {
         std::cout << std::endl;
     }
 
-    if (!Tanja84dk::tools::file_exists(outputFilename)) {
+    if (!Tanja84dk::tools::file_exist(outputFilename)) {
         Tanja84dk::tools::write_file(binaryOutputVector, outputFilename);
         printf("The output is written to a file called %s in the folder you have the program in\n\n",
                outputFilename.c_str());
@@ -52,7 +52,7 @@ void chipher::binary::encoding(const std::string &data) {
 
     outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-8Bit-Binary.txt";
 
-    if (!Tanja84dk::tools::file_exists(outputFilename)) {
+    if (!Tanja84dk::tools::file_exist(outputFilename)) {
         Tanja84dk::tools::write_file(binaryOutputVector, outputFilename);
         printf("The output is also written to a file called %s in the folder you have the program in\n",
                outputFilename.c_str());
@@ -65,7 +65,7 @@ void chipher::binary::decoding_string(const std::string &inputFilename) {
     std::string outputData;
     outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Decoded.txt";
 
-    if (Tanja84dk::tools::file_exists(inputFilename) == true) {
+    if (Tanja84dk::tools::file_exist(inputFilename) == true) {
         std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
         inputFileHandler.seekg(0, std::ios::end);
         inputDataBuffer.reserve(inputFileHandler.tellg());
@@ -84,7 +84,7 @@ void chipher::binary::decoding_string(const std::string &inputFilename) {
         printf("\n%s\n", outputData.c_str());
     }
 
-    if (Tanja84dk::tools::file_exists(outputFilename) == false) {
+    if (Tanja84dk::tools::file_exist(outputFilename) == false) {
         Tanja84dk::tools::write_file(outputData, outputFilename);
         printf("The output is also written to a file called %s in the folder you have the program in\n",
                outputFilename.c_str());

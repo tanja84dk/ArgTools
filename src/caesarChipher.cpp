@@ -29,7 +29,7 @@ void chipher::ceasar::encoding(const int chipher_shift_key, const std::string &i
     output_filename_string =
         Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-CeasarChipher.txt";
 
-    if (Tanja84dk::tools::file_exists(output_filename_string) == false) {
+    if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
         Tanja84dk::tools::write_file(output_data_string, output_filename_string);
         printf("The output is also written to a file called %s in the folder you have the program in\n",
                output_filename_string.c_str());
@@ -65,7 +65,7 @@ void chipher::ceasar::decoding(const int chipher_shift_key, const std::string &i
     output_filename_string =
         Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Decoded-CeasarChipher.txt";
 
-    if (Tanja84dk::tools::file_exists(output_filename_string) == false) {
+    if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
         Tanja84dk::tools::write_file(output_data_string, output_filename_string);
         printf("The output is also written to a file called %s in the folder you have the program in\n",
                output_filename_string.c_str());
