@@ -450,7 +450,7 @@ void main_menu(void) {
         std::cout << "----------------------------\n"
                   << "      Main Menu\n"
                   << "----------------------------\n"
-                  << "[1] Base32\n"
+                  << "[ ] Base32 ( Broken atm :( )\n"
                   << "[2] Base64\n"
                   << "[3] 8Bit Binary\n"
                   << "[4] Ceasar Chipher\n"
