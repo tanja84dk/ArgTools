@@ -40,14 +40,6 @@ set(HeaderFiles
 # Add source to this project's executable.
 add_executable(${PROJECT_NAME} ${SourceFiles})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Tanja84dk::tools Tanja84dk::crypt fmt::fmt)
-
-target_link_options(${PROJECT_NAME}
-    PRIVATE
-        -static-libgcc
-        -static-libstdc++
-)
-
 target_include_directories(${PROJECT_NAME}
     PRIVATE
         $<INSTALL_INTERFACE:include>
@@ -57,7 +49,33 @@ target_include_directories(${PROJECT_NAME}
         #${PROJECT_BINARY_DIR}/include
 )
 
-if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR OR ArgTools_BUILD_TESTING STREQUAL ON)
-    enable_testing()
-    add_subdirectory(test)
+target_compile_options(${PROJECT_NAME}
+    PRIVATE
+        ${WERROR_FLAG}
+        ${PEDANTIC_COMPILE_FLAGS}
+)
+
+
+target_compile_features(${PROJECT_NAME}
+    PRIVATE
+        cxx_std_17
+)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE Tanja84dk::tools Tanja84dk::crypt fmt::fmt)
+
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+        LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+        CXX_STANDARD 17
+        VERSION ${${PROJECT_NAME}_VERSION}
+        SOVERSION ${${PROJECT_NAME}_VERSION_MAJOR}
+)
+
+if(NOT CMAKE_BUILD_TYPE STREQUAL Release)
+    if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR OR ArgTools_BUILD_TESTING STREQUAL ON)
+        enable_testing()
+        add_subdirectory(test)
+    endif()
 endif()
