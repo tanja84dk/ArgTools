@@ -42,6 +42,12 @@ add_executable(${PROJECT_NAME} ${SourceFiles})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Tanja84dk::tools Tanja84dk::crypt fmt::fmt)
 
+target_link_options(${PROJECT_NAME}
+    PRIVATE
+        -static-libgcc
+        -static-libstdc++
+)
+
 target_include_directories(${PROJECT_NAME}
     PRIVATE
         $<INSTALL_INTERFACE:include>
