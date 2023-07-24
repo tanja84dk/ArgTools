@@ -7,11 +7,10 @@
 #include <Tanja84dk/crypt/ceasar/ceasar.h>
 #include <Tanja84dk/tools/tools.h>
 
-#include <list>
-#include <string>
-#include <utility>
+#include <vector>
 
 #include "licenses.h"
+#include "menu.h"
 
 class AargToolsData {
    public:
@@ -35,30 +34,25 @@ void sub_menu_base32(void) {
     while (exit_flag_base32_bool == false) {
         short unsigned int menu_choice;
 
-        std::cout << "----------------------------\n"
-                  << "      Base32\n"
-                  << "----------------------------\n"
-                  << "[1] Encoding From File\n"
-                  << "[2] Decoding From File\n"
-                  << "[3] Encoding From String\n"
-                  << "[4] Decoding From String\n"
-                  << "[0] Back To Main Menu\n"
-                  << "----------------------------\n"
-                  << "Enter your choice: ";
+        const std::vector<std::string> base32_menu_vector = {"Encoding From File", "Decoding From File",
+                                                             "Encoding From String", "Decoding From String"};
+        Tanja84dk::argtools::Menu Base32_Menu(base32_menu_vector);
+        Base32_Menu.print_menu("Base32", false);
+
         std::cin >> menu_choice;
-        std::cout << std::endl;
+        fmt::print("\n");
 
         switch (menu_choice) {
             case 1:
                 Base32DataStore.clear();
-                std::cout << "You chose Encoding From File\nEnter filename: ";
+                fmt::print("You chose Encoding From File\nEnter filename: ");
                 std::getline(std::cin >> std::ws, Base32DataStore.input_filename_string);
                 if (Tanja84dk::tools::file_exist(Base32DataStore.input_filename_string)) {
                     Base32DataStore.input_data_string =
                         Tanja84dk::tools::read_file(Base32DataStore.input_filename_string);
                     Base32DataStore.output_data_string =
                         Tanja84dk::crypt::base32::encode(Base32DataStore.input_data_string);
-                    std::cout << Base32DataStore.output_data_string << "\n\n";
+                    fmt::print("{}\n\n", Base32DataStore.output_data_string);
                 }
 
                 exit_flag_base32_bool = true;
@@ -66,14 +60,14 @@ void sub_menu_base32(void) {
             case 2:
                 // Decoding Base64 From File
                 Base32DataStore.clear();
-                std::cout << "You chose Decoding From File\nEnter filename: ";
+                fmt::print("You chose Decoding From File\nEnter filename: ");
                 std::getline(std::cin >> std::ws, Base32DataStore.input_filename_string);
                 if (Tanja84dk::tools::file_exist(Base32DataStore.input_filename_string)) {
                     Base32DataStore.input_data_string =
                         Tanja84dk::tools::read_file(Base32DataStore.input_filename_string);
                     Base32DataStore.output_data_string =
                         Tanja84dk::crypt::base32::decode(Base32DataStore.input_data_string);
-                    std::cout << Base32DataStore.output_data_string << "\n\n";
+                    fmt::print("{}\n\n", Base32DataStore.output_data_string);
                 }
 
                 exit_flag_base32_bool = true;
@@ -85,18 +79,18 @@ void sub_menu_base32(void) {
                 std::getline(std::cin >> std::ws, Base32DataStore.input_data_string);
                 Base32DataStore.output_data_string =
                     Tanja84dk::crypt::base32::encode(Base32DataStore.input_data_string);
-                std::cout << Base32DataStore.output_data_string << "\n\n";
+                fmt::print("{}\n\n", Base32DataStore.output_data_string);
 
                 exit_flag_base32_bool = true;
                 break;
             case 4:
                 // Decoding Base64 From String
                 Base32DataStore.clear();
-                std::cout << "You chose Decoding From string\nEnter the string: ";
+                fmt::print("You chose Decoding From string\nEnter the string: ");
                 std::getline(std::cin >> std::ws, Base32DataStore.input_data_string);
                 Base32DataStore.output_data_string =
                     Tanja84dk::crypt::base32::decode(Base32DataStore.input_data_string);
-                std::cout << Base32DataStore.output_data_string << "\n\n";
+                fmt::print("{}\n\n", Base32DataStore.output_data_string);
 
                 exit_flag_base32_bool = true;
                 break;
@@ -116,16 +110,12 @@ void sub_menu_base64(void) {
     while (exit_flag_base64_bool == false) {
         short unsigned int sub_menu_base64_choice;
 
-        std::cout << "----------------------------\n"
-                  << "      Base64   \n"
-                  << "----------------------------\n"
-                  << "[1] Encoding From File\n"
-                  << "[2] Decoding From File\n"
-                  << "[3] Encoding From String\n"
-                  << "[4] Decoding From String\n"
-                  << "[0] Back To Main Menu\n"
-                  << "----------------------------\n"
-                  << "Enter your choice: ";
+        const std::vector<std::string> base64_menu_vector = {"Encoding From File", "Decoding From File",
+                                                             "Encoding From String", "Decoding From String"};
+
+        Tanja84dk::argtools::Menu Base64_Menu(base64_menu_vector);
+        Base64_Menu.print_menu("Base64", false);
+
         std::cin >> sub_menu_base64_choice;
         std::cout << std::endl;
 
@@ -202,15 +192,11 @@ void sub_menu_8bit(void) {
     while (exit_flag_8bit_bool == false) {
         short unsigned int sub_menu_8bit_choice;
 
-        std::cout << "----------------------------\n"
-                  << "      8 bit Binary          \n"
-                  << "----------------------------\n"
-                  << "[1] Encoding From File\n"
-                  << "[2] Decoding From File\n"
-                  << "[3] Encoding From String\n"
-                  << "[0] Back To Main Menu\n"
-                  << "----------------------------\n"
-                  << "Enter your choice: ";
+        const std::vector<std::string> binary_8bit_menu_vector = {"Encoding From File", "Decoding From File",
+                                                                  "Encoding From String"};
+        Tanja84dk::argtools::Menu Binary_8Bit_Menu(binary_8bit_menu_vector);
+        Binary_8Bit_Menu.print_menu("8 bit Binary", false);
+
         std::cin >> sub_menu_8bit_choice;
         std::cout << std::endl;
 
@@ -286,17 +272,13 @@ void sub_menu_ceasar_chipher() {
     while (exit_flag_ceasar_chipher_bool == false) {
         short unsigned int sub_menu_ceasar_chipher_choice;
 
-        std::cout << "----------------------------\n"
-                  << "      Ceasar\n"
-                  << "----------------------------\n"
-                  << "[1] Encoding From File\n"
-                  << "[2] Decoding From File\n"
-                  << "[3] Encoding From String\n"
-                  << "[4] Decoding From String\n"
-                  << "[9] Bruteforce The Key(Working on)\n"
-                  << "[0] Back To Main Menu\n"
-                  << "----------------------------\n"
-                  << "Enter your choice: ";
+        const std::vector<std::string> ceasar_menu_vector = {"Encoding From File", "Decoding From File",
+                                                             "Encoding From String", "Decoding From String",
+                                                             "Bruteforce The Key(Working on)"};
+
+        Tanja84dk::argtools::Menu Ceasar_Menu(ceasar_menu_vector);
+        Ceasar_Menu.print_menu("Ceasar Chipher", false);
+
         std::cin >> sub_menu_ceasar_chipher_choice;
         std::cout << std::endl;
 
@@ -393,7 +375,7 @@ void sub_menu_ceasar_chipher() {
 
                 exit_flag_ceasar_chipher_bool = true;
                 break;
-            case 9:
+            case 5:
                 CeasarDataStore.clear();
                 std::cout << "Enter the encoded data: ";
                 std::getline(std::cin >> std::ws, CeasarDataStore.input_data_string);
@@ -414,14 +396,10 @@ void sub_menu_about() noexcept {
     while (exit_flag_about_bool == false) {
         short unsigned int sub_menu_about_choice;
 
-        std::cout << "----------------------------\n"
-                  << "      About\n"
-                  << "----------------------------\n"
-                  << "[ ] About Project\n"
-                  << "[2] All Licenses\n"
-                  << "[0] Back To Main Menu\n"
-                  << "----------------------------\n"
-                  << "Enter your choice: ";
+        const std::vector<std::string> about_menu_vector = {"About Project", "All Licenses"};
+        Tanja84dk::argtools::Menu About_Menu(about_menu_vector);
+        About_Menu.print_menu("About", false);
+
         std::cin >> sub_menu_about_choice;
         std::cout << std::endl;
 
@@ -447,21 +425,14 @@ void main_menu(void) {
     std::string input_file_string;
     while (1) {
         short unsigned int main_menu_choice;
-        std::cout << "----------------------------\n"
-                  << "      Main Menu\n"
-                  << "----------------------------\n"
-                  << "[ ] Base32 ( Broken atm :( )\n"
-                  << "[2] Base64\n"
-                  << "[3] 8Bit Binary\n"
-                  << "[4] Ceasar Chipher\n"
-                  << "[6] Test Print File\n"
-                  << "[9] About\n"
-                  << "[0] Exit\n"
-                  << "----------------------------\n"
-                  << "This is Version " << ArgTools_VERSION_MAJOR << "." << ArgTools_VERSION_MINOR << "."
-                  << ArgTools_VERSION_PATCH << "-dev\n"
-                  << "----------------------------\n"
-                  << "Enter your choice: ";
+
+        // About is hardcoded atm to opætion 9 ( for the last option before exit ) wich is why it's not included in the
+        // vector
+        const std::vector<std::string> main_menu_vector = {"Base32 ( Broken atm :( )", "Base64", "8Bit Binary",
+                                                           "Ceasar Chipher", "Test File Print"};
+
+        Tanja84dk::argtools::Menu Main_Menu(main_menu_vector);
+        Main_Menu.print_menu("Main Menu", true);
 
         std::cin >> main_menu_choice;
         std::cout << std::endl;

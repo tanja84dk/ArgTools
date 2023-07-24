@@ -25,11 +25,13 @@ configure_file(${PROJECT_NAME}Config.h.in include/${PROJECT_NAME}Config.h)
 
 set(SourceFiles
     "src/main.cpp"
+    "src/menu.cpp"
     "src/caesarChipher.cpp"
     "src/wrapperBinary.cpp")
 
 set(HeaderFiles
     "src/main.h"
+    "src/menu.h"
     "src/pxx.h"
     "src/licenses.h"
     "src/caesarChipher.h"
@@ -42,8 +44,12 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Tanja84dk::tools Tanja84dk::crypt 
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
-        ${PROJECT_BINARY_DIR}/include
-        ${tanja84dk_crypt_BINARY_DIR}/include)
+        $<INSTALL_INTERFACE:include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+        ${tanja84dk_crypt_BINARY_DIR}/include
+        #${PROJECT_BINARY_DIR}/include
+)
 
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR OR ArgTools_BUILD_TESTING STREQUAL ON)
     enable_testing()
