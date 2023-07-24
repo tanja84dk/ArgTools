@@ -7,16 +7,16 @@ void chipher::ceasar::encoding(const int chipher_shift_key, const std::string &i
     std::string output_filename_string;
 
     char buffer_char;
-    for (int i = 0; i != input_data.length(); i++) {
+    for (std::size_t i = 0; i != input_data.length(); i++) {
         buffer_char = input_data[i];
         if (buffer_char >= 'a' && buffer_char <= 'z') {
-            buffer_char = buffer_char + chipher_shift_key;
+            buffer_char = buffer_char + static_cast<char>(chipher_shift_key);
             if (buffer_char > 'z') {
                 buffer_char = buffer_char - 'z' + 'a' - 1;
             }
             output_data_string += buffer_char;
         } else if (buffer_char >= 'A' && buffer_char <= 'Z') {
-            buffer_char = buffer_char + chipher_shift_key;
+            buffer_char = buffer_char + static_cast<char>(chipher_shift_key);
             if (buffer_char > 'Z') {
                 buffer_char = buffer_char - 'Z' + 'a' - 1;
             }
@@ -43,16 +43,16 @@ void chipher::ceasar::decoding(const int chipher_shift_key, const std::string &i
     std::string output_filename_string;
 
     char buffer_char;
-    for (int i = 0; i != input_data.length(); i++) {
+    for (std::size_t i = 0; i != input_data.length(); i++) {
         buffer_char = input_data[i];
         if (buffer_char >= 'a' && buffer_char <= 'z') {
-            buffer_char = buffer_char - chipher_shift_key;
+            buffer_char = buffer_char - static_cast<char>(chipher_shift_key);
             if (buffer_char < 'a') {
                 buffer_char = buffer_char + 'z' - 'a' + 1;
             }
             output_data_string += buffer_char;
         } else if (buffer_char >= 'A' && buffer_char <= 'Z') {
-            buffer_char = buffer_char - chipher_shift_key;
+            buffer_char = buffer_char - static_cast<char>(chipher_shift_key);
             if (buffer_char < 'A') {
                 buffer_char = buffer_char + 'Z' - 'A' + 1;
             }
@@ -79,16 +79,16 @@ void chipher::ceasar::decoding_brute_force(const std::string &input_data) {
         short unsigned int count_of_spaces_uint = 0;
         std::string output_data_string;
         char buffer_char;
-        for (int i = 0; i != input_data.length() && count_of_spaces_uint != 3; i++) {
+        for (std::size_t i = 0; i != input_data.length() && count_of_spaces_uint != 3; i++) {
             buffer_char = input_data[i];
             if (buffer_char >= 'a' && buffer_char <= 'z') {
-                buffer_char = buffer_char - chipher_shift_key_int;
+                buffer_char = buffer_char - static_cast<char>(chipher_shift_key_int);
                 if (buffer_char < 'a') {
                     buffer_char = buffer_char + 'z' - 'a' + 1;
                 }
                 output_data_string += buffer_char;
             } else if (buffer_char >= 'A' && buffer_char <= 'Z') {
-                buffer_char = buffer_char - chipher_shift_key_int;
+                buffer_char = buffer_char - static_cast<char>(chipher_shift_key_int);
                 if (buffer_char < 'A') {
                     buffer_char = buffer_char + 'Z' - 'A' + 1;
                 }

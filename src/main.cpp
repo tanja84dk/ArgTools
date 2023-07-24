@@ -14,7 +14,7 @@
 
 class AargToolsData {
    public:
-    const void clear() noexcept {
+    void clear() noexcept {
         this->input_filename_string.clear();
         this->output_filename_string.clear();
         this->input_data_string.clear();
@@ -466,7 +466,7 @@ void main_menu(void) {
     }
 }
 
-int main(int argc, char **argv) {
+int main() {
     main_menu();
 
     return 0;
