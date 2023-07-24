@@ -1,5 +1,7 @@
 #include "caesarChipher.h"
 
+#include <fmt/core.h>
+
 void chipher::ceasar::encoding(const int chipher_shift_key, const std::string &input_data) {
     std::string output_data_string;
     std::string output_filename_string;
@@ -31,8 +33,8 @@ void chipher::ceasar::encoding(const int chipher_shift_key, const std::string &i
 
     if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
         Tanja84dk::tools::write_file(output_data_string, output_filename_string);
-        printf("The output is also written to a file called %s in the folder you have the program in\n",
-               output_filename_string.c_str());
+        fmt::print("The output is also written to a file called {} in the folder you have the program in\n",
+                   output_filename_string);
     }
 };
 
@@ -67,8 +69,8 @@ void chipher::ceasar::decoding(const int chipher_shift_key, const std::string &i
 
     if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
         Tanja84dk::tools::write_file(output_data_string, output_filename_string);
-        printf("The output is also written to a file called %s in the folder you have the program in\n",
-               output_filename_string.c_str());
+        fmt::print("The output is also written to a file called {} in the folder you have the program in\n",
+                   output_filename_string);
     }
 };
 

@@ -1,5 +1,6 @@
 #include "wrapperBinary.h"
 
+#include <fmt/core.h>
 void chipher::binary::encoding(void) {
     std::string inputFilename;
     std::string outputFilename;
@@ -8,7 +9,7 @@ void chipher::binary::encoding(void) {
     std::vector<std::bitset<8>> binaryOutputVector;
     binaryOutputVector.reserve(100);
 
-    printf("Enter Filename: ");
+    fmt::print("Enter Filename: ");
     std::getline(std::cin >> std::ws, inputFilename);
     std::cout << std::endl;
 
@@ -37,8 +38,8 @@ void chipher::binary::encoding(void) {
 
     if (!Tanja84dk::tools::file_exist(outputFilename)) {
         Tanja84dk::tools::write_file(binaryOutputVector, outputFilename);
-        printf("The output is written to a file called %s in the folder you have the program in\n\n",
-               outputFilename.c_str());
+        fmt::print("The output is written to a file called {} in the folder you have the program in\n\n",
+                   outputFilename);
     }
 }
 
@@ -54,8 +55,8 @@ void chipher::binary::encoding(const std::string &data) {
 
     if (!Tanja84dk::tools::file_exist(outputFilename)) {
         Tanja84dk::tools::write_file(binaryOutputVector, outputFilename);
-        printf("The output is also written to a file called %s in the folder you have the program in\n",
-               outputFilename.c_str());
+        fmt::print("The output is also written to a file called {} in the folder you have the program in\n",
+                   outputFilename);
     }
 }
 
@@ -81,12 +82,12 @@ void chipher::binary::decoding_string(const std::string &inputFilename) {
             outputData += characterDecoded;
         }
 
-        printf("\n%s\n", outputData.c_str());
+        fmt::print("\n{}\n", outputData);
     }
 
     if (Tanja84dk::tools::file_exist(outputFilename) == false) {
         Tanja84dk::tools::write_file(outputData, outputFilename);
-        printf("The output is also written to a file called %s in the folder you have the program in\n",
-               outputFilename.c_str());
+        fmt::print("The output is also written to a file called {} in the folder you have the program in\n",
+                   outputFilename);
     }
 }
