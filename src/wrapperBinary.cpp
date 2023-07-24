@@ -1,6 +1,8 @@
 #include "wrapperBinary.h"
 
 #include <fmt/core.h>
+
+#include <string>
 void chipher::binary::encoding(void) {
     std::string inputFilename;
     std::string outputFilename;
@@ -18,13 +20,13 @@ void chipher::binary::encoding(void) {
     if (Tanja84dk::tools::file_exist(inputFilename)) {
         std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
         inputFileHandler.seekg(0, std::ios::end);
-        inputDataBuffer.reserve(inputFileHandler.tellg());
+        inputDataBuffer.reserve((std::size_t)inputFileHandler.tellg());
         inputFileHandler.seekg(0, std::ios::beg);
         inputDataBuffer.assign((std::istreambuf_iterator<char>(inputFileHandler)), std::istreambuf_iterator<char>());
 
-        for (std::size_t i = 0; i < inputDataBuffer.size(); i++) {
-            binaryOutputVector.push_back(std::bitset<8>(inputDataBuffer.c_str()[i]));
-        }
+        // for (std::size_t i = 0; i < inputDataBuffer.size(); i++) {
+        binaryOutputVector.push_back(std::bitset<8>(inputDataBuffer.data()));
+        //}
 
         // Printing the vector to the console
         for (size_t i = 0; i < binaryOutputVector.size(); i++) {
@@ -47,9 +49,9 @@ void chipher::binary::encoding(const std::string &data) {
     std::vector<std::bitset<8>> binaryOutputVector;
     std::string outputFilename;
 
-    for (std::size_t i = 0; i < int(data.size()); i++) {
-        binaryOutputVector.push_back(std::bitset<8>(data.c_str()[i]));
-    }
+    // for (std::size_t i = 0; i < data.size(); i++) {
+    binaryOutputVector.push_back(std::bitset<8>(data.data()));
+    //}
 
     outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-8Bit-Binary.txt";
 
@@ -69,7 +71,7 @@ void chipher::binary::decoding_string(const std::string &inputFilename) {
     if (Tanja84dk::tools::file_exist(inputFilename) == true) {
         std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
         inputFileHandler.seekg(0, std::ios::end);
-        inputDataBuffer.reserve(inputFileHandler.tellg());
+        inputDataBuffer.reserve((std::size_t)inputFileHandler.tellg());
         inputFileHandler.seekg(0, std::ios::beg);
         inputDataBuffer.assign((std::istreambuf_iterator<char>(inputFileHandler)), std::istreambuf_iterator<char>());
 
