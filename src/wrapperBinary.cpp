@@ -1,113 +1,97 @@
 #include "wrapperBinary.h"
 
+#include <fmt/core.h>
 
-void my8BitBinaryEncoding(void)
-{
+#include <string>
+void chipher::binary::encoding(void) {
+    std::string input_filename = {};
+    std::string output_filename = {};
+    std::string input_data_buffer = {};
+    std::string output_data = {};
+    std::vector<std::bitset<8>> binary_output_vector = {};
+    binary_output_vector.reserve(100);
 
-    std::string inputFilename;
-    std::string outputFilename;
-    std::string inputDataBuffer;
-    std::string outputData;
-    std::vector<std::bitset<8>> binaryOutputVector;
-    binaryOutputVector.reserve(100);
-
-    printf("Enter Filename: ");
-    std::getline(std::cin >> std::ws, inputFilename);
+    fmt::print("Enter Filename: ");
+    std::getline(std::cin >> std::ws, input_filename);
     std::cout << std::endl;
 
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Encoded.txt";
+    output_filename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" + input_filename + "-Binary-Encoded.txt";
 
-    if ( Tools::doesFileExist(inputFilename) )
-    {
-        std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
+    if (Tanja84dk::tools::file_exist(input_filename)) {
+        std::ifstream inputFileHandler(input_filename, std::ifstream::in);
         inputFileHandler.seekg(0, std::ios::end);
-        inputDataBuffer.reserve(inputFileHandler.tellg());
+        input_data_buffer.reserve(static_cast<std::size_t>(inputFileHandler.tellg()));
         inputFileHandler.seekg(0, std::ios::beg);
-        inputDataBuffer.assign((std::istreambuf_iterator<char>(inputFileHandler)),
-                                std::istreambuf_iterator<char>());
-        
+        input_data_buffer.assign((std::istreambuf_iterator<char>(inputFileHandler)), std::istreambuf_iterator<char>());
 
-        for ( std::size_t i = 0; i < inputDataBuffer.size(); i++ )
-        {
-            binaryOutputVector.push_back(std::bitset<8>(inputDataBuffer.c_str()[i]));
-
+        for (std::size_t i = 0; i < input_data_buffer.size(); i++) {
+            binary_output_vector.push_back(std::bitset<8>(input_data_buffer.c_str()[i]));
         }
 
         // Printing the vector to the console
-        for ( size_t i = 0; i < binaryOutputVector.size(); i++ )
-        {
-            std::cout << binaryOutputVector[i];
-            if ( i != binaryOutputVector.size() - 1 )
-            {
+        for (size_t i = 0; i < binary_output_vector.size(); i++) {
+            std::cout << binary_output_vector[i];
+            if (i != binary_output_vector.size() - 1) {
                 std::cout << ' ';
             }
         }
         std::cout << std::endl;
     }
 
-    if ( !Tools::doesFileExist(outputFilename) )
-    {
-        Tools::writeFile(binaryOutputVector, outputFilename);
-        printf( "The output is written to a file called %s in the folder you have the program in\n\n", outputFilename.c_str() );
+    if (!Tanja84dk::tools::file_exist(output_filename)) {
+        Tanja84dk::tools::write_file(binary_output_vector, output_filename);
+        fmt::print("The output is written to a file called {} in the folder you have the program in\n\n",
+                   output_filename);
     }
-
 }
 
-void my8BitBinaryEncoding(const std::string &data)
-{
-    std::vector<std::bitset<8>> binaryOutputVector;
-    std::string outputFilename;
+void chipher::binary::encoding([[maybe_unused]] const std::string &data) {
+    std::vector<std::bitset<8>> binaryOutputVector = {};
+    std::string outputFilename = {};
 
-    for (std::size_t i = 0; i < int(data.size()); i++ )
-    {
-        binaryOutputVector.push_back(std::bitset<8>(data.c_str()[i]));
+    for (std::size_t i = 0; i < data.size(); i++) {
+        std::bitset<8> temporary_bitset_data(data.c_str()[i]);
+        binaryOutputVector.push_back(temporary_bitset_data);
+        // binaryOutputVector.push_back(std::bitset<8>((char)data.c_str()[i]));
     }
 
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-8Bit-Binary.txt";
+    outputFilename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-8Bit-Binary.txt";
 
-    if ( !Tools::doesFileExist(outputFilename) )
-    {
-        Tools::writeFile(binaryOutputVector, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
+    if (!Tanja84dk::tools::file_exist(outputFilename)) {
+        // Tanja84dk::tools::write_file(binaryOutputVector, outputFilename);
+        fmt::print("The output is also written to a file called {} in the folder you have the program in\n",
+                   outputFilename);
     }
-    
 }
 
-void my8BitBinaryDecodingString(const std::string &inputFilename)
-{
-
-    std::string outputFilename;
+void chipher::binary::decoding_string(const std::string &inputFilename) {
+    std::string output_filename;
     std::string inputDataBuffer;
     std::string outputData;
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Decoded.txt";
+    output_filename = Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" + inputFilename + "-Binary-Decoded.txt";
 
-    if ( Tools::doesFileExist(inputFilename) == true )
-    {
+    if (Tanja84dk::tools::file_exist(inputFilename) == true) {
         std::ifstream inputFileHandler(inputFilename, std::ifstream::in);
         inputFileHandler.seekg(0, std::ios::end);
-        inputDataBuffer.reserve(inputFileHandler.tellg());
+        inputDataBuffer.reserve(static_cast<std::size_t>(inputFileHandler.tellg()));
         inputFileHandler.seekg(0, std::ios::beg);
-        inputDataBuffer.assign((std::istreambuf_iterator<char>(inputFileHandler)),
-                                std::istreambuf_iterator<char>());
-        
+        inputDataBuffer.assign((std::istreambuf_iterator<char>(inputFileHandler)), std::istreambuf_iterator<char>());
+
         std::stringstream binaryStringStream(inputDataBuffer);
 
-        while (binaryStringStream.good())
-        {
+        while (binaryStringStream.good()) {
             std::bitset<8> bits;
             binaryStringStream >> bits;
             char characterDecoded = char(bits.to_ulong());
             outputData += characterDecoded;
         }
 
-        printf( "\n%s\n", outputData.c_str() );
-    }
-    
-
-    if ( Tools::doesFileExist(outputFilename) == false )
-    {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
+        fmt::print("\n{}\n", outputData);
     }
 
+    if (Tanja84dk::tools::file_exist(output_filename) == false) {
+        Tanja84dk::tools::write_file(outputData, output_filename);
+        fmt::print("The output is also written to a file called {} in the folder you have the program in\n",
+                   output_filename);
+    }
 }

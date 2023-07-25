@@ -1,7 +1,8 @@
+[Bb]uild/
+[Oo]ut/
+*.bak
+*.tmp
+*.sh
 .vscode/
-build/
-tmp.cpp
-tmp/
-.project
-getSubModules.sh
-main.xml
+.vs/
+Makefile

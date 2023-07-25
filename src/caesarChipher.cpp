@@ -1,123 +1,107 @@
 #include "caesarChipher.h"
 
-void caesarEncoding(const int keyValue, const std::string &inputData)
-{
-    std::string outputData;
-    std::string outputFilename;
+#include <fmt/core.h>
 
-    char charBuffer;
-    for ( int i = 0; i != inputData.length(); i++ )
-    {
-        charBuffer = inputData[i];
-        if ( charBuffer >= 'a' && charBuffer <= 'z')
-        {
-            charBuffer = charBuffer + keyValue;
-            if ( charBuffer > 'z' )
-            {
-                charBuffer = charBuffer - 'z' + 'a' - 1;
+void chipher::ceasar::encoding(const int chipher_shift_key, const std::string &input_data) {
+    std::string output_data_string;
+    std::string output_filename_string;
+
+    char buffer_char;
+    for (std::size_t i = 0; i != input_data.length(); i++) {
+        buffer_char = input_data[i];
+        if (buffer_char >= 'a' && buffer_char <= 'z') {
+            buffer_char = buffer_char + static_cast<char>(chipher_shift_key);
+            if (buffer_char > 'z') {
+                buffer_char = buffer_char - 'z' + 'a' - 1;
             }
-            outputData += charBuffer;
-        } else if ( charBuffer >= 'A' && charBuffer <= 'Z' ) {
-            charBuffer = charBuffer + keyValue;
-            if ( charBuffer > 'Z' )
-            {
-                charBuffer = charBuffer - 'Z' + 'a' - 1;
+            output_data_string += buffer_char;
+        } else if (buffer_char >= 'A' && buffer_char <= 'Z') {
+            buffer_char = buffer_char + static_cast<char>(chipher_shift_key);
+            if (buffer_char > 'Z') {
+                buffer_char = buffer_char - 'Z' + 'a' - 1;
             }
-            outputData += charBuffer;
+            output_data_string += buffer_char;
         } else {
-            outputData += charBuffer;
-        }
-
-    }
-
-    std::cout << outputData << std::endl;
-
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-CeasarChipher.txt";
-
-    if ( Tools::doesFileExist(outputFilename) == false )
-    {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
-    }
-};
-
-void ceasarDecoding(const int keyValue, const std::string &inputData)
-{
-    std::string outputData;
-    std::string outputFilename;
-
-    char charBuffer;
-    for ( int i = 0; i != inputData.length(); i++ )
-    {        
-        charBuffer = inputData[i];
-        if (charBuffer >= 'a' && charBuffer <= 'z')
-        {
-            charBuffer = charBuffer - keyValue;
-            if (charBuffer < 'a')
-            {
-                charBuffer = charBuffer + 'z' - 'a' + 1;
-            }
-            outputData += charBuffer;
-        } else if (charBuffer >= 'A' && charBuffer <= 'Z'){
-            charBuffer = charBuffer - keyValue;
-            if (charBuffer < 'A')
-            {
-                charBuffer = charBuffer + 'Z' - 'A' + 1;
-            }
-            outputData += charBuffer;
-        } else {
-            outputData += charBuffer;
+            output_data_string += buffer_char;
         }
     }
 
-    std::cout << outputData << std::endl;
+    std::cout << output_data_string << std::endl;
 
-    outputFilename = Tools::createTimestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Decoded-CeasarChipher.txt";
+    output_filename_string =
+        Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Encoded-CeasarChipher.txt";
 
-    if ( Tools::doesFileExist(outputFilename) == false )
-    {
-        Tools::writeFile(outputData, outputFilename);
-        printf( "The output is also written to a file called %s in the folder you have the program in\n", outputFilename.c_str() );
+    if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
+        Tanja84dk::tools::write_file(output_data_string, output_filename_string);
+        fmt::print("The output is also written to a file called {} in the folder you have the program in\n",
+                   output_filename_string);
     }
 };
 
-void ceasarDecodingBruteforce(const std::string &inputData)
-{
-    
-    for ( int keyValue = 1; keyValue < 27; keyValue++ )
-    {
+void chipher::ceasar::decoding(const int chipher_shift_key, const std::string &input_data) {
+    std::string output_data_string;
+    std::string output_filename_string;
 
-        short unsigned int spaceCounter = 0;
-        std::string outputData;
-        char charBuffer;
-        for ( int i = 0; i != inputData.length() && spaceCounter != 3; i++ )
-        {        
-            charBuffer = inputData[i];
-            if (charBuffer >= 'a' && charBuffer <= 'z')
-            {
-                charBuffer = charBuffer - keyValue;
-                if (charBuffer < 'a')
-                {
-                    charBuffer = charBuffer + 'z' - 'a' + 1;
+    char buffer_char;
+    for (std::size_t i = 0; i != input_data.length(); i++) {
+        buffer_char = input_data[i];
+        if (buffer_char >= 'a' && buffer_char <= 'z') {
+            buffer_char = buffer_char - static_cast<char>(chipher_shift_key);
+            if (buffer_char < 'a') {
+                buffer_char = buffer_char + 'z' - 'a' + 1;
+            }
+            output_data_string += buffer_char;
+        } else if (buffer_char >= 'A' && buffer_char <= 'Z') {
+            buffer_char = buffer_char - static_cast<char>(chipher_shift_key);
+            if (buffer_char < 'A') {
+                buffer_char = buffer_char + 'Z' - 'A' + 1;
+            }
+            output_data_string += buffer_char;
+        } else {
+            output_data_string += buffer_char;
+        }
+    }
+
+    std::cout << output_data_string << std::endl;
+
+    output_filename_string =
+        Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Input-Decoded-CeasarChipher.txt";
+
+    if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
+        Tanja84dk::tools::write_file(output_data_string, output_filename_string);
+        fmt::print("The output is also written to a file called {} in the folder you have the program in\n",
+                   output_filename_string);
+    }
+};
+
+void chipher::ceasar::decoding_brute_force(const std::string &input_data) {
+    for (int chipher_shift_key_int = 1; chipher_shift_key_int < 27; chipher_shift_key_int++) {
+        short unsigned int count_of_spaces_uint = 0;
+        std::string output_data_string;
+        char buffer_char;
+        for (std::size_t i = 0; i != input_data.length() && count_of_spaces_uint != 3; i++) {
+            buffer_char = input_data[i];
+            if (buffer_char >= 'a' && buffer_char <= 'z') {
+                buffer_char = buffer_char - static_cast<char>(chipher_shift_key_int);
+                if (buffer_char < 'a') {
+                    buffer_char = buffer_char + 'z' - 'a' + 1;
                 }
-                outputData += charBuffer;
-            } else if (charBuffer >= 'A' && charBuffer <= 'Z'){
-                charBuffer = charBuffer - keyValue;
-                if (charBuffer < 'A')
-                {
-                    charBuffer = charBuffer + 'Z' - 'A' + 1;
+                output_data_string += buffer_char;
+            } else if (buffer_char >= 'A' && buffer_char <= 'Z') {
+                buffer_char = buffer_char - static_cast<char>(chipher_shift_key_int);
+                if (buffer_char < 'A') {
+                    buffer_char = buffer_char + 'Z' - 'A' + 1;
                 }
-                outputData += charBuffer;
+                output_data_string += buffer_char;
             } else {
-                if ( charBuffer == ' ')
-                {
-                    spaceCounter ++;
-                    if (spaceCounter == 3)
-                    {
-                        std::cout << "Key Value " << keyValue << " and the data is: " << outputData << std::endl;
+                if (buffer_char == ' ') {
+                    count_of_spaces_uint++;
+                    if (count_of_spaces_uint == 3) {
+                        std::cout << "Key Value " << chipher_shift_key_int << " and the data is: " << output_data_string
+                                  << std::endl;
                     }
                 }
-                outputData += charBuffer;
+                output_data_string += buffer_char;
             }
         }
     }
