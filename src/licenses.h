@@ -53,11 +53,13 @@ std::string get_cryptopp_cmake_license() {
     return license;
 };
 
+#ifdef cryptopp_LICENSE
 std::string get_cryptopp_license() {
     std::string license = cryptopp_LICENSE;
     replace_all(license, ";", "\n");
     return license;
 };
+#endif  // cryptopp_LICENSE
 
 std::string get_fmtlib_license() {
     std::string license = fmtlib_LICENSE;
@@ -81,8 +83,10 @@ void print_all_licenses() {
     print_title_for_licenses("cryptopp-cmake");
     fmt::print("{}\n\n", get_cryptopp_cmake_license());
 
+#ifdef cryptopp_LICENSE
     print_title_for_licenses("cryptopp");
     fmt::print("{}\n\n", get_cryptopp_license());
+#endif  // cryptopp_LICENSE
 }
 }  // namespace license
 }  // namespace argtools

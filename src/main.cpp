@@ -51,7 +51,7 @@ void sub_menu_base32(void) {
                     Base32DataStore.input_data_string =
                         Tanja84dk::tools::read_file(Base32DataStore.input_filename_string);
                     Base32DataStore.output_data_string =
-                        Tanja84dk::crypt::base32::encode(Base32DataStore.input_data_string);
+                        Tanja84dk::crypt::Base32(Base32DataStore.input_data_string).encode();
                     fmt::print("{}\n\n", Base32DataStore.output_data_string);
                 }
 
@@ -65,8 +65,11 @@ void sub_menu_base32(void) {
                 if (Tanja84dk::tools::file_exist(Base32DataStore.input_filename_string)) {
                     Base32DataStore.input_data_string =
                         Tanja84dk::tools::read_file(Base32DataStore.input_filename_string);
+
                     Base32DataStore.output_data_string =
-                        Tanja84dk::crypt::base32::decode(Base32DataStore.input_data_string);
+                        Tanja84dk::crypt::Base32(Base32DataStore.input_data_string).decode();
+                    // Base32DataStore.output_data_string =
+                    // Tanja84dk::crypt::base32::decode(Base32DataStore.input_data_string);
                     fmt::print("{}\n\n", Base32DataStore.output_data_string);
                 }
 
@@ -78,7 +81,7 @@ void sub_menu_base32(void) {
                 std::cout << "You chose Encoding From string\nEnter the string: ";
                 std::getline(std::cin >> std::ws, Base32DataStore.input_data_string);
                 Base32DataStore.output_data_string =
-                    Tanja84dk::crypt::base32::encode(Base32DataStore.input_data_string);
+                    Tanja84dk::crypt::Base32(Base32DataStore.input_data_string).encode();
                 fmt::print("{}\n\n", Base32DataStore.output_data_string);
 
                 exit_flag_base32_bool = true;
@@ -89,13 +92,14 @@ void sub_menu_base32(void) {
                 fmt::print("You chose Decoding From string\nEnter the string: ");
                 std::getline(std::cin >> std::ws, Base32DataStore.input_data_string);
                 Base32DataStore.output_data_string =
-                    Tanja84dk::crypt::base32::decode(Base32DataStore.input_data_string);
+                    Tanja84dk::crypt::Base32(Base32DataStore.input_data_string).decode();
                 fmt::print("{}\n\n", Base32DataStore.output_data_string);
 
                 exit_flag_base32_bool = true;
                 break;
             case 0:
                 exit_flag_base32_bool = true;
+                break;
             default:
                 std::cout << "The option " << menu_choice << " does not exist\nRedirecting to main menu\n\n";
                 exit_flag_base32_bool = true;
@@ -129,7 +133,7 @@ void sub_menu_base64(void) {
                     Base64DataStore.input_data_string =
                         Tanja84dk::tools::read_file(Base64DataStore.input_filename_string);
                     Base64DataStore.output_data_string =
-                        Tanja84dk::crypt::base64::encode(Base64DataStore.input_data_string);
+                        Tanja84dk::crypt::Base64(Base64DataStore.input_data_string).encode();
                     std::cout << Base64DataStore.output_data_string << "\n\n";
                 }
 
@@ -144,7 +148,7 @@ void sub_menu_base64(void) {
                     Base64DataStore.input_data_string =
                         Tanja84dk::tools::read_file(Base64DataStore.input_filename_string);
                     Base64DataStore.output_data_string =
-                        Tanja84dk::crypt::base64::decode(Base64DataStore.input_data_string);
+                        Tanja84dk::crypt::Base64(Base64DataStore.input_data_string).decode();
                     std::cout << Base64DataStore.output_data_string << "\n\n";
                 }
 
@@ -156,7 +160,7 @@ void sub_menu_base64(void) {
                 std::cout << "You chose Encoding from string\nEnter the string: ";
                 std::getline(std::cin >> std::ws, Base64DataStore.input_data_string);
                 Base64DataStore.output_data_string =
-                    Tanja84dk::crypt::base64::encode(Base64DataStore.input_data_string);
+                    Tanja84dk::crypt::Base64(Base64DataStore.input_data_string).encode();
                 std::cout << Base64DataStore.output_data_string << "\n\n";
 
                 exit_flag_base64_bool = true;
@@ -167,12 +171,13 @@ void sub_menu_base64(void) {
                 std::cout << "You chose Decoding from string\nEnter the string: ";
                 std::getline(std::cin >> std::ws, Base64DataStore.input_data_string);
                 Base64DataStore.output_data_string =
-                    Tanja84dk::crypt::base64::decode(Base64DataStore.input_data_string);
+                    Tanja84dk::crypt::Base64(Base64DataStore.input_data_string).decode();
                 std::cout << Base64DataStore.output_data_string << "\n\n";
                 exit_flag_base64_bool = true;
                 break;
             case 0:
                 exit_flag_base64_bool = true;
+                break;
             default:
                 std::cout << "The option " << sub_menu_base64_choice << " does not exist\nRedirecting to main menu\n\n";
                 exit_flag_base64_bool = true;
@@ -212,7 +217,7 @@ void sub_menu_8bit(void) {
                                              "-Binary-Encoded.txt";
                     output_vector.clear();
                     output_vector =
-                        Tanja84dk::crypt::binary::encode(Tanja84dk::tools::read_file(input_filename_string));
+                        Tanja84dk::crypt::Binary(Tanja84dk::tools::read_file(input_filename_string)).encode_to_bits();
                     if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
                         Tanja84dk::tools::write_file(output_vector, output_filename_string);
                     }
@@ -231,7 +236,7 @@ void sub_menu_8bit(void) {
                                              "-Binary-Decoded.txt";
                     std::string output_data_string = {};
                     output_data_string =
-                        Tanja84dk::crypt::binary::decode(Tanja84dk::tools::read_file(input_filename_string));
+                        Tanja84dk::crypt::Binary(Tanja84dk::tools::read_file(input_filename_string)).decode();
                     if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
                         Tanja84dk::tools::write_file(output_data_string, output_filename_string);
                     }
@@ -247,7 +252,7 @@ void sub_menu_8bit(void) {
                 output_filename_string =
                     Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Binary-Eecoded.txt";
                 output_vector.clear();
-                output_vector = Tanja84dk::crypt::binary::encode(input_string);
+                output_vector = Tanja84dk::crypt::Binary(input_string).encode_to_bits();
                 if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
                     Tanja84dk::tools::write_file(output_vector, output_filename_string);
                 }

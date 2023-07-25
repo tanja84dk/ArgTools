@@ -25,17 +25,13 @@ configure_file(${PROJECT_NAME}Config.h.in include/${PROJECT_NAME}Config.h)
 
 set(SourceFiles
     "src/main.cpp"
-    "src/menu.cpp"
-    "src/caesarChipher.cpp"
-    "src/wrapperBinary.cpp")
+    "src/menu.cpp")
 
 set(HeaderFiles
     "src/main.h"
     "src/menu.h"
     "src/pxx.h"
-    "src/licenses.h"
-    "src/caesarChipher.h"
-    "src/wrapperBinary.h")
+    "src/licenses.h")
 
 # Add source to this project's executable.
 add_executable(${PROJECT_NAME} ${SourceFiles})
@@ -43,10 +39,8 @@ add_executable(${PROJECT_NAME} ${SourceFiles})
 target_include_directories(${PROJECT_NAME}
     PRIVATE
         $<INSTALL_INTERFACE:include>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
         ${tanja84dk_crypt_BINARY_DIR}/include
-        #${PROJECT_BINARY_DIR}/include
 )
 
 target_compile_options(${PROJECT_NAME}
