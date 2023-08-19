@@ -12,7 +12,7 @@ namespace argtools {
 
 class Menu {
    public:
-    Menu() noexcept {};
+    Menu() noexcept = default;
     Menu(const std::vector<std::string> &menu_options_vector) { this->menu_options_vector_ = menu_options_vector; };
     void print_title(const std::string &title) const noexcept;
 
