@@ -12,7 +12,7 @@
 #include "licenses.h"
 #include "menu.h"
 
-class AargToolsData {
+class ArgToolsData {
    public:
     void clear() noexcept {
         this->input_filename_string.clear();
@@ -29,7 +29,7 @@ class AargToolsData {
 };
 
 void sub_menu_base32(void) {
-    AargToolsData Base32DataStore;
+    ArgToolsData Base32DataStore;
     bool exit_flag_base32_bool = false;
     while (exit_flag_base32_bool == false) {
         short unsigned int menu_choice;
@@ -109,7 +109,7 @@ void sub_menu_base32(void) {
 }
 
 void sub_menu_base64(void) {
-    AargToolsData Base64DataStore;
+    ArgToolsData Base64DataStore;
     bool exit_flag_base64_bool = false;
     while (exit_flag_base64_bool == false) {
         short unsigned int sub_menu_base64_choice;
@@ -250,7 +250,7 @@ void sub_menu_8bit(void) {
                 std::cout << std::endl;
 
                 output_filename_string =
-                    Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Binary-Eecoded.txt";
+                    Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Binary-Encoded.txt";
                 output_vector.clear();
                 output_vector = Tanja84dk::crypt::Binary(input_string).encode_to_bits();
                 if (Tanja84dk::tools::file_exist(output_filename_string) == false) {
@@ -270,35 +270,35 @@ void sub_menu_8bit(void) {
     }
 }
 
-void sub_menu_ceasar_chipher() {
-    AargToolsData CeasarDataStore;
+void sub_menu_ceasar_cipher() {
+    ArgToolsData CeasarDataStore;
     int shift_key_int;
-    bool exit_flag_ceasar_chipher_bool = false;
-    while (exit_flag_ceasar_chipher_bool == false) {
-        short unsigned int sub_menu_ceasar_chipher_choice;
+    bool exit_flag_ceasar_cipher_bool = false;
+    while (exit_flag_ceasar_cipher_bool == false) {
+        short unsigned int sub_menu_ceasar_cipher_choice;
 
         const std::vector<std::string> ceasar_menu_vector = {"Encoding From File", "Decoding From File",
                                                              "Encoding From String", "Decoding From String",
-                                                             "Bruteforce The Key(Working on)"};
+                                                             "Brute force The Key(Working on)"};
 
         Tanja84dk::argtools::Menu Ceasar_Menu(ceasar_menu_vector);
-        Ceasar_Menu.print_menu("Ceasar Chipher", false);
+        Ceasar_Menu.print_menu("Ceasar Cipher", false);
 
-        std::cin >> sub_menu_ceasar_chipher_choice;
+        std::cin >> sub_menu_ceasar_cipher_choice;
         std::cout << std::endl;
 
-        switch (sub_menu_ceasar_chipher_choice) {
+        switch (sub_menu_ceasar_cipher_choice) {
             case 1:
                 CeasarDataStore.clear();
                 std::cout << "Enter the filename: ";
                 std::getline(std::cin >> std::ws, CeasarDataStore.input_filename_string);
-                std::cout << "\nEnter the numeric shifting chipher wissed to use: ";
+                std::cout << "\nEnter the numeric shifting cipher wished to use: ";
                 std::cin >> shift_key_int;
                 if (Tanja84dk::tools::file_exist(CeasarDataStore.input_filename_string)) {
                     CeasarDataStore.output_filename_string =
                         Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" +
                         Tanja84dk::tools::remove_extention(CeasarDataStore.input_filename_string) +
-                        "-Encoded-CeasarChipher.txt";
+                        "-Encoded-CeasarCipher.txt";
                     CeasarDataStore.input_data_string =
                         Tanja84dk::tools::read_file(CeasarDataStore.input_filename_string);
                     CeasarDataStore.output_data_string =
@@ -311,19 +311,19 @@ void sub_menu_ceasar_chipher() {
                                   << CeasarDataStore.output_filename_string << " in the folder you ran it from\n";
                     }
                 }
-                exit_flag_ceasar_chipher_bool = true;
+                exit_flag_ceasar_cipher_bool = true;
                 break;
             case 2:
                 CeasarDataStore.clear();
                 std::cout << "Enter the filename: ";
                 std::getline(std::cin >> std::ws, CeasarDataStore.input_filename_string);
-                std::cout << "\nEnter the numeric shifting chipher wissed to use: ";
+                std::cout << "\nEnter the numeric shifting cipher wished to use: ";
                 std::cin >> shift_key_int;
                 if (Tanja84dk::tools::file_exist(CeasarDataStore.input_filename_string)) {
                     CeasarDataStore.output_filename_string =
                         Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-" +
                         Tanja84dk::tools::remove_extention(CeasarDataStore.input_filename_string) +
-                        "-Decoded-CeasarChipher.txt";
+                        "-Decoded-CeasarCipher.txt";
                     CeasarDataStore.input_data_string =
                         Tanja84dk::tools::read_file(CeasarDataStore.input_filename_string);
                     CeasarDataStore.output_data_string =
@@ -336,17 +336,17 @@ void sub_menu_ceasar_chipher() {
                                   << CeasarDataStore.output_filename_string << " in the folder you ran it from\n";
                     }
                 }
-                exit_flag_ceasar_chipher_bool = true;
+                exit_flag_ceasar_cipher_bool = true;
                 break;
             case 3:
                 CeasarDataStore.clear();
                 std::cout << "Enter the plain data: ";
                 std::getline(std::cin >> std::ws, CeasarDataStore.input_data_string);
-                std::cout << "\nEnter the numeric shifting chipher wissed to use: ";
+                std::cout << "\nEnter the numeric shifting cipher wished to use: ";
                 std::cin >> shift_key_int;
 
                 CeasarDataStore.output_filename_string =
-                    Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Encoded-CeasarChipher.txt";
+                    Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Encoded-CeasarCipher.txt";
                 CeasarDataStore.output_data_string =
                     Tanja84dk::crypt::ceasar::encode(shift_key_int, CeasarDataStore.input_data_string);
 
@@ -357,17 +357,17 @@ void sub_menu_ceasar_chipher() {
                               << CeasarDataStore.output_filename_string << " in the folder you ran it from\n";
                 }
 
-                exit_flag_ceasar_chipher_bool = true;
+                exit_flag_ceasar_cipher_bool = true;
                 break;
             case 4:
                 CeasarDataStore.clear();
                 std::cout << "Enter the encoded data: ";
                 std::getline(std::cin >> std::ws, CeasarDataStore.input_data_string);
-                std::cout << "\nEnter the numeric shifting chipher wissed to use: ";
+                std::cout << "\nEnter the numeric shifting cipher wished to use: ";
                 std::cin >> shift_key_int;
 
                 CeasarDataStore.output_filename_string =
-                    Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Decoded-CeasarChipher.txt";
+                    Tanja84dk::tools::get_timestamp("%Y%m%d_%H%M%S") + "-Manual-Decoded-CeasarCipher.txt";
                 CeasarDataStore.output_data_string =
                     Tanja84dk::crypt::ceasar::decode(shift_key_int, CeasarDataStore.input_data_string);
 
@@ -378,7 +378,7 @@ void sub_menu_ceasar_chipher() {
                               << CeasarDataStore.output_filename_string << " in the folder you ran it from\n";
                 }
 
-                exit_flag_ceasar_chipher_bool = true;
+                exit_flag_ceasar_cipher_bool = true;
                 break;
             case 5:
                 CeasarDataStore.clear();
@@ -387,10 +387,10 @@ void sub_menu_ceasar_chipher() {
                 Tanja84dk::crypt::ceasar::decode_brute_force(CeasarDataStore.input_data_string);
                 break;
             case 0:
-                exit_flag_ceasar_chipher_bool = true;
+                exit_flag_ceasar_cipher_bool = true;
                 break;
             default:
-                exit_flag_ceasar_chipher_bool = true;
+                exit_flag_ceasar_cipher_bool = true;
                 break;
         }
     }
@@ -431,10 +431,10 @@ void main_menu(void) {
     while (1) {
         short unsigned int main_menu_choice;
 
-        // About is hardcoded atm to opætion 9 ( for the last option before exit ) wich is why it's not included in the
+        // About is hardcoded atm to option 9 ( for the last option before exit ) which is why it's not included in the
         // vector
         const std::vector<std::string> main_menu_vector = {"Base32 ( Broken atm :( )", "Base64", "8Bit Binary",
-                                                           "Ceasar Chipher", "Test File Print"};
+                                                           "Ceasar Cipher", "Test File Print"};
 
         Tanja84dk::argtools::Menu Main_Menu(main_menu_vector);
         Main_Menu.print_menu("Main Menu", true);
@@ -453,7 +453,7 @@ void main_menu(void) {
                 sub_menu_8bit();
                 break;
             case 4:
-                sub_menu_ceasar_chipher();
+                sub_menu_ceasar_cipher();
                 break;
             case 6:
                 std::cout << "Enter The Filename: ";

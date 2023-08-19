@@ -23,11 +23,11 @@ void Menu::print_options(const std::vector<std::string> &menu_options_vector, bo
     this->print_options(is_main_menu);
 }
 
-void Menu::print_options(bool is_main_memu) const noexcept {
+void Menu::print_options(bool is_main_menu) const noexcept {
     for (std::size_t i = 0; i < this->menu_options_vector_.size(); i++) {
         fmt::print("[{}] {}\n", i + 1, this->menu_options_vector_[i]);
     }
-    if (is_main_memu) {
+    if (is_main_menu) {
         fmt::print(
             "[9] About\n"
             "[0] Exit\n"
@@ -42,11 +42,11 @@ void Menu::print_options(bool is_main_memu) const noexcept {
         "Enter your choice: ");
 }
 
-void Menu::print_menu(const std::string &title, bool is_main_memu,
+void Menu::print_menu(const std::string &title, bool is_main_menu,
                       const std::vector<std::string> &menu_options_vector) const noexcept {
     this->print_title(title);
     if (menu_options_vector.empty()) {
-        this->print_options(is_main_memu);
+        this->print_options(is_main_menu);
         return;
     }
     return;
